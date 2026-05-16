@@ -18,8 +18,8 @@
   --accent-3: #ff6b9d;
   --accent-gradient: linear-gradient(135deg,#6c63ff 0%,#00b894 50%,#ff6b9d 100%);
   --accent-glow: 0 0 40px rgba(108,99,255,0.15);
-  --font-heading: 'Outfit',sans-serif;
-  --font-body: 'Inter',sans-serif;
+  --font-heading: 'Broadway', 'Castellar', 'Outfit', sans-serif;
+  --font-body: 'Lucida Handwriting', 'Bradley Hand ITC', 'Inter', cursive, sans-serif;
   --nav-height: 72px;
   --ease-out: cubic-bezier(0.16,1,0.3,1);
 }
@@ -29,6 +29,22 @@ html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{font-family:var(--font-body);background:linear-gradient(135deg, #e0f2fe 0%, #ede9fe 50%, #ccfbf1 100%);background-attachment:fixed;color:var(--text-primary);line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 button{font-family:var(--font-body);cursor:pointer;border:none;background:none;color:inherit}
+
+.landing-body {
+  --font-heading: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Inter', sans-serif;
+}
+.study-body {
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+.study-body .study-page-title,
+.study-body .video-title,
+.study-body .chapters-title,
+.study-body .quiz-header {
+  font-family: 'Broadway', 'Castellar', 'Outfit', sans-serif;
+}
 
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--bg-secondary)}
@@ -50,9 +66,117 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none;c
 .nav-lang-switcher:focus{border-color:var(--accent-1)}
 
 /* ═══════════════════════════════════════
+   LOGO BANNER (Landing Page Header)
+   ═══════════════════════════════════════ */
+.logo-banner {
+  position: relative;
+  z-index: 10;
+  padding-top: calc(var(--nav-height) + 2rem);
+  padding-bottom: 1rem;
+}
+.logo-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  gap: 2.5rem;
+}
+.logo-banner-left,
+.logo-banner-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.partner-logo {
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+.partner-logo:hover {
+  transform: scale(1.05);
+}
+.partner-logo-left {
+  max-height: 140px;
+}
+.partner-logo-right {
+  max-height: 130px;
+}
+.logo-banner-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brand-title-marker {
+  font-family: 'Permanent Marker', cursive;
+  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+  letter-spacing: 3px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+}
+.marker-edu {
+  color: #1a237e;
+}
+.marker-stream {
+  color: #263238;
+}
+.marker-x {
+  color: #d32f2f;
+}
+.grade-badge {
+  font-family: 'Permanent Marker', cursive;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  color: #333;
+  background: #ffe082;
+  padding: 0.3rem 1.4rem;
+  border-radius: 6px;
+  display: inline-block;
+  transform: rotate(-1deg);
+  box-shadow: 0 2px 8px rgba(255, 224, 130, 0.5);
+}
+
+/* Responsive logo banner */
+@media (max-width: 768px) {
+  .logo-banner-inner {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+  .partner-logo-left {
+    max-height: 90px;
+  }
+  .partner-logo-right {
+    max-height: 80px;
+  }
+  .brand-title-marker {
+    font-size: 2.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .brand-title-marker {
+    font-size: 1.8rem;
+  }
+  .grade-badge {
+    font-size: 1rem;
+  }
+  .partner-logo-left {
+    max-height: 70px;
+  }
+  .partner-logo-right {
+    max-height: 65px;
+  }
+}
+
+/* ═══════════════════════════════════════
    HERO (Landing Page)
    ═══════════════════════════════════════ */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:calc(var(--nav-height) + 4rem) 2rem 6rem;overflow:hidden}
+.hero{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;padding:2rem 2rem 5rem;overflow:hidden}
 
 
 .hero-content{position:relative;z-index:2;text-align:center;max-width:800px;animation:fadeInUp 1s var(--ease-out) both}
@@ -348,6 +472,8 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none;c
 .quiz-result.bad{color:var(--accent-3)}
 .quiz-retake-btn{display:block;margin:0 auto 1.5rem;padding:.6rem 1.5rem;font-size:.85rem;font-weight:600;color:var(--accent-1);border:1px solid var(--border-glass);border-radius:10px;transition:all .3s}
 .quiz-retake-btn:hover{background:rgba(108,99,255,0.08);border-color:var(--accent-1)}
+.ai-quiz-badge{display:inline-block;padding:.4rem 1rem;margin-bottom:1rem;background:linear-gradient(135deg,rgba(108,99,255,0.15),rgba(0,212,170,0.15));border:1px solid rgba(108,99,255,0.25);border-radius:20px;font-size:.8rem;font-weight:600;color:var(--accent-1);letter-spacing:.02em}
+.quiz-explanation{margin-top:.6rem;padding:.6rem 1rem;background:rgba(0,212,170,0.07);border-left:3px solid var(--accent-2);border-radius:0 8px 8px 0;font-size:.82rem;color:var(--text-secondary);line-height:1.5;animation:fadeInUp .3s var(--ease-out)}
 
 /* ═══════════════════════════════════════
    ANIMATIONS

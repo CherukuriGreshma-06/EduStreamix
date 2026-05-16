@@ -18,7 +18,14 @@
       <span class="brand-text">EduStreami<span class="brand-x">x</span></span>
     </a>
     <div class="nav-links">
-      <span class="nav-lang-display" id="nav-lang-display">English</span>
+      <select class="nav-lang-switcher" id="nav-lang-switcher">
+        <option value="English">English</option>
+        <option value="Hindi">हिंदी</option>
+        <option value="Telugu">తెలుగు</option>
+        <option value="Tamil">தமிழ்</option>
+        <option value="Kannada">ಕನ್ನಡ</option>
+        <option value="Malayalam">മലയാളം</option>
+      </select>
       <a href="/">Home</a>
     </div>
   </nav>
@@ -29,21 +36,11 @@
       <div class="step-progress" id="step-progress">
         <div class="step-dot completed" data-step="1">
           <span class="step-dot-inner">1</span>
-          <span class="step-dot-label">Language</span>
-        </div>
-        <div class="step-line filled"></div>
-        <div class="step-dot completed" data-step="2">
-          <span class="step-dot-inner">2</span>
-          <span class="step-dot-label">Class</span>
-        </div>
-        <div class="step-line filled"></div>
-        <div class="step-dot completed" data-step="3">
-          <span class="step-dot-inner">3</span>
           <span class="step-dot-label">Board</span>
         </div>
         <div class="step-line filled"></div>
-        <div class="step-dot active" data-step="4">
-          <span class="step-dot-inner">4</span>
+        <div class="step-dot active" data-step="2">
+          <span class="step-dot-inner">2</span>
           <span class="step-dot-label">Subjects</span>
         </div>
       </div>
@@ -79,7 +76,8 @@
         'Mathematics':'📐','Science':'🔬','Social Science':'🌍','English':'📖',
         'Hindi':'📝','Physics':'⚡','Chemistry':'🧪','Biology':'🧬',
         'General Science':'🔬','Social Studies':'🌍','Telugu':'📜',
-        'Physical Science':'⚡','Biological Science':'🧬'
+        'Physical Science':'⚡','Biological Science':'🧬',
+        'Geography':'🗺️','Economics':'💰','history_civics':'🌍'
       };
 
       const grid = document.getElementById('subjects-grid');
@@ -121,18 +119,20 @@
   <script src="/js/i18n.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const display = document.getElementById('nav-lang-display');
-      if (display) {
+      const switcher = document.getElementById('nav-lang-switcher');
+      if (switcher) {
         const lang = localStorage.getItem('appLang') || 'English';
-        const languageNames = {
-          'English': 'English',
-          'Hindi': 'हिंदी',
-          'Telugu': 'తెలుగు',
-          'Tamil': 'தமிழ்',
-          'Kannada': 'ಕನ್ನಡ',
-          'Malayalam': 'മലയാളം'
-        };
-        display.textContent = languageNames[lang] || lang;
+        switcher.value = lang;
+
+        switcher.addEventListener('change', (e) => {
+          const selected = e.target.value;
+          if (window.applyLanguage) {
+            window.applyLanguage(selected);
+          } else {
+            localStorage.setItem('appLang', selected);
+            window.location.reload();
+          }
+        });
       }
     });
     document.addEventListener('languageChanged', async (e) => {

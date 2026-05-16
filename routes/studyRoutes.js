@@ -5,12 +5,13 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers/studyController');
+const quizCtrl = require('../controllers/quizController');
 
 // ── Pages ───────────────────────────────────
 router.get('/',         ctrl.renderLanding);
-router.get('/classes',  ctrl.renderClasses);
+
 router.get('/boards',   ctrl.renderBoards);
-router.get('/languages', ctrl.renderLanguages);
+
 router.get('/subjects', ctrl.renderSubjects);
 router.get('/study',    ctrl.renderStudy);
 
@@ -22,6 +23,9 @@ router.get('/api/video',    ctrl.getVideo);
 // Translation endpoint
 router.post('/translate-batch', ctrl.translateBatch);
 router.post('/api/upload-pdf', ctrl.uploadPdf);
+
+// ── AI Quiz Generation ──────────────────────
+router.post('/api/generate-test', quizCtrl.generateTest);
 
 
 // ── Admin ───────────────────────────────────

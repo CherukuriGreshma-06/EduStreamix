@@ -42,16 +42,11 @@
         <div class="step-line"></div>
         <div class="step-dot" data-step="2">
           <span class="step-dot-inner">2</span>
-          <span class="step-dot-label">Class</span>
+          <span class="step-dot-label">Board</span>
         </div>
         <div class="step-line"></div>
         <div class="step-dot" data-step="3">
           <span class="step-dot-inner">3</span>
-          <span class="step-dot-label">Board</span>
-        </div>
-        <div class="step-line"></div>
-        <div class="step-dot" data-step="4">
-          <span class="step-dot-inner">4</span>
           <span class="step-dot-label">Subjects</span>
         </div>
       </div>
@@ -105,8 +100,8 @@
         if (window.applyLanguage) applyLanguage(selectedLang);
         else localStorage.setItem('appLang', selectedLang);
 
-        // Redirect to classes step
-        window.location.href = '/classes';
+        // Redirect to boards step for Class 10
+        window.location.href = '/boards?grade=10';
       });
     });
 

@@ -256,7 +256,7 @@
     }
   }
 
-  // ── Quiz ───────────────────────────────────
+  // ── Quiz (AI-powered with fallback) ────────
   async function showQuiz() {
     const section = document.getElementById('quiz-section');
     const body = document.getElementById('quiz-body');
@@ -265,32 +265,63 @@
     const retake = document.getElementById('quiz-retake-btn');
     const submit = document.getElementById('quiz-submit-btn');
 
-    let pool = currentChapterData.quizQuestions;
-    if (!pool || pool.length === 0) {
-      pool = (window.QUIZ_DATA && window.QUIZ_DATA[SUBJECT]) ? window.QUIZ_DATA[SUBJECT] : (window.QUIZ_DATA ? window.QUIZ_DATA['General'] : []);
-    }
-    if (!pool || pool.length === 0) return;
-
     section.style.display = '';
     result.style.display = 'none';
     retake.style.display = 'none';
     actions.style.display = 'none';
+    body.innerHTML = '<div class="loader-spinner" style="margin: 0 auto;"></div><p style="text-align:center;margin-top:0.5rem;color:var(--text-secondary,#aaa);">Generating AI quiz…</p>';
 
-    // Pick random 10 questions (or less if pool is smaller)
-    let shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, 10);
+    let questions = [];
+    let isAI = false;
 
-    body.innerHTML = '<div class="loader-spinner" style="margin: 0 auto;"></div>';
+    // 1. Try AI-generated quiz
+    try {
+      const topicName = currentChapterData.originalChapterName || currentChapterData.chapterName;
+      const res = await fetch('/api/generate-test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          board: BOARD,
+          grade: GRADE,
+          subject: SUBJECT,
+          focusTopic: topicName,
+          difficulty: 'medium',
+          numQuestions: 5
+        })
+      });
+      const data = await res.json();
+      if (data.questions && data.questions.length > 0) {
+        // Normalise AI response to match existing quiz format
+        questions = data.questions.map(q => ({
+          question: q.question,
+          options: q.options,
+          answer: q.correctAnswerIndex,
+          explanation: q.explanation || ''
+        }));
+        isAI = true;
+      }
+    } catch (e) {
+      console.warn('AI quiz generation failed, falling back to static quiz:', e.message);
+    }
 
-    // Translate questions if language is not English
+    // 2. Fallback to hardcoded quiz data
+    if (!questions.length) {
+      let pool = currentChapterData.quizQuestions;
+      if (!pool || pool.length === 0) {
+        pool = (window.QUIZ_DATA && window.QUIZ_DATA[SUBJECT]) ? window.QUIZ_DATA[SUBJECT] : (window.QUIZ_DATA ? window.QUIZ_DATA['General'] : []);
+      }
+      if (!pool || pool.length === 0) { section.style.display = 'none'; return; }
+      questions = [...pool].sort(() => Math.random() - 0.5).slice(0, 10);
+    }
+
+    // 3. Translate if needed
     if (LANGUAGE !== 'English' && LANGUAGE !== 'en') {
       const textsToTranslate = [];
-      shuffled.forEach(q => {
+      questions.forEach(q => {
         if (!textsToTranslate.includes(q.question)) textsToTranslate.push(q.question);
-        q.options.forEach(opt => {
-          if (!textsToTranslate.includes(opt)) textsToTranslate.push(opt);
-        });
+        q.options.forEach(opt => { if (!textsToTranslate.includes(opt)) textsToTranslate.push(opt); });
+        if (q.explanation && !textsToTranslate.includes(q.explanation)) textsToTranslate.push(q.explanation);
       });
-
       if (textsToTranslate.length > 0) {
         try {
           const res = await fetch('/translate-batch', {
@@ -299,24 +330,30 @@
             body: JSON.stringify({ texts: textsToTranslate, targetLang: LANGUAGE })
           });
           const translations = await res.json();
-          
-          shuffled = shuffled.map(q => ({
+          questions = questions.map(q => ({
             ...q,
             question: translations[q.question] || q.question,
-            options: q.options.map(opt => translations[opt] || opt)
+            options: q.options.map(opt => translations[opt] || opt),
+            explanation: q.explanation ? (translations[q.explanation] || q.explanation) : ''
           }));
-        } catch (e) {
-          console.error("Quiz translation failed", e);
-        }
+        } catch (e) { console.error("Quiz translation failed", e); }
       }
     }
 
+    // 4. Render questions
     actions.style.display = '';
     body.innerHTML = '';
-    shuffled.forEach((q, qi) => {
+    if (isAI) {
+      const badge = document.createElement('div');
+      badge.className = 'ai-quiz-badge';
+      badge.innerHTML = '✨ AI-Generated Quiz';
+      body.appendChild(badge);
+    }
+    questions.forEach((q, qi) => {
       const div = document.createElement('div');
       div.className = 'quiz-question';
       div.dataset.answer = q.answer !== undefined ? q.answer : q.correctAnswer;
+      div.dataset.explanation = q.explanation || '';
       let html = '<p>' + (qi+1) + '. <span>' + q.question + '</span></p>';
       q.options.forEach((opt, oi) => {
         html += '<label class="quiz-option"><input type="radio" name="q' + qi + '" value="' + oi + '"> <span>' + opt + '</span></label>';
@@ -325,10 +362,11 @@
       body.appendChild(div);
     });
 
+    // 5. Submit handler
     submit.onclick = () => {
       let score = 0;
-      const questions = body.querySelectorAll('.quiz-question');
-      questions.forEach((qDiv) => {
+      const qDivs = body.querySelectorAll('.quiz-question');
+      qDivs.forEach((qDiv) => {
         const correct = parseInt(qDiv.dataset.answer);
         const selected = qDiv.querySelector('input:checked');
         const opts = qDiv.querySelectorAll('.quiz-option');
@@ -339,11 +377,19 @@
           else { if (opts[val]) opts[val].classList.add('wrong'); }
         }
         qDiv.querySelectorAll('input').forEach(inp => inp.disabled = true);
+        // Show explanation if available
+        const explanation = qDiv.dataset.explanation;
+        if (explanation) {
+          const expDiv = document.createElement('div');
+          expDiv.className = 'quiz-explanation';
+          expDiv.innerHTML = '💡 ' + explanation;
+          qDiv.appendChild(expDiv);
+        }
       });
       actions.style.display = 'none';
       result.style.display = '';
-      result.textContent = (window.t ? window.t('Score') : 'Score') + ': ' + score + ' / ' + questions.length;
-      result.className = 'quiz-result ' + (score >= (questions.length * 0.8) ? 'good' : score >= (questions.length * 0.4) ? 'ok' : 'bad');
+      result.textContent = (window.t ? window.t('Score') : 'Score') + ': ' + score + ' / ' + qDivs.length;
+      result.className = 'quiz-result ' + (score >= (qDivs.length * 0.8) ? 'good' : score >= (qDivs.length * 0.4) ? 'ok' : 'bad');
       retake.style.display = '';
     };
 
