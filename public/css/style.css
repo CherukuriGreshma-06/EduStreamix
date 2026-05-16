@@ -75,13 +75,14 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none;c
   padding-bottom: 1rem;
 }
 .logo-banner-inner {
-  max-width: 1100px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 1.5rem;
-  gap: 0.8rem;
+  padding: 1.5rem 1rem;
+  gap: 1.5rem;
+  background: transparent;
 }
 .logo-banner-left,
 .logo-banner-right {
@@ -94,17 +95,18 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none;c
   width: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
-  filter: contrast(1.1) brightness(1.05);
+  background: transparent !important;
+  filter: contrast(1.1) brightness(1.02);
   transition: transform 0.3s ease;
 }
 .partner-logo:hover {
   transform: scale(1.05);
 }
 .partner-logo-left {
-  max-height: 90px;
+  max-height: 120px;
 }
 .partner-logo-right {
-  max-height: 85px;
+  max-height: 115px;
 }
 .logo-banner-center {
   flex: 1;
