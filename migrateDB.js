@@ -7,8 +7,9 @@ const LOCAL_URI = 'mongodb://127.0.0.1:27017/EduStreamX';
 
 // TODO: Paste your MongoDB Atlas Connection String here
 // Example: 'mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/EduStreamX'
-const ATLAS_URI = 'mongodb://greshma:greshma25@ac-qr9jlcr-shard-00-00.ige3uf5.mongodb.net:27017,ac-qr9jlcr-shard-00-01.ige3uf5.mongodb.net:27017,ac-qr9jlcr-shard-00-02.ige3uf5.mongodb.net:27017/EduStreamX?ssl=true&replicaSet=atlas-2qr7ei-shard-0&authSource=admin&retryWrites=true&w=majority&appName=EduStreamix';
+require("dotenv").config();
 
+const MONGO_URI = process.env.MONGO_URI;
 async function migrateDatabase() {
     if (ATLAS_URI === 'YOUR_ATLAS_CONNECTION_STRING_HERE') {
         console.error('\n❌ ERROR: Please replace YOUR_ATLAS_CONNECTION_STRING_HERE with your actual MongoDB Atlas connection string in migrateDB.js\n');
