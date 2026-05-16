@@ -75,13 +75,13 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none;c
   padding-bottom: 1rem;
 }
 .logo-banner-inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 2rem 3rem;
-  gap: 2.5rem;
+  justify-content: center;
+  padding: 1rem 2rem;
+  gap: 1.2rem;
 }
 .logo-banner-left,
 .logo-banner-right {
@@ -94,7 +94,7 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none;c
   width: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  filter: contrast(1.1) brightness(1.05);
   transition: transform 0.3s ease;
 }
 .partner-logo:hover {
