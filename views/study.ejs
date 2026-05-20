@@ -4,133 +4,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Study <%= displaySubject || '' %> chapters on EduStreamix." />
-  <title>
-    <%= displaySubject || 'Study' %> — EduStreamix
-  </title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet" />
+  <title><%= displaySubject || 'Study' %> — EduStreamix</title>
+
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 
-<body class="study-body">
+<body>
 
-  <nav class="navbar scrolled" id="navbar">
-    <a href="/" class="nav-brand">
-      <span class="brand-icon">🎓</span>
-      <span class="brand-text">EduStreami<span class="brand-x">x</span></span>
-    </a>
-    <div class="nav-links">
-      <select class="nav-lang-switcher" id="nav-lang-switcher">
-        <option value="English">English</option>
-        <option value="Hindi">हिंदी</option>
-        <option value="Telugu">తెలుగు</option>
-        <option value="Tamil">தமிழ்</option>
-        <option value="Kannada">ಕನ್ನಡ</option>
-        <option value="Malayalam">മലയാളം</option>
-      </select>
-      <a href="/">Home</a>
-    </div>
+  <!-- NAVBAR -->
+  <nav>
+    <a href="/">🎓 EduStreamix</a>
+    <a href="/">Home</a>
   </nav>
 
-  <main class="study-main">
-    <div class="study-container">
+  <main>
 
-      <!-- HEADER -->
-      <div class="study-page-header">
-        <a href="/subjects?grade=<%= selectedGrade %>&board=<%= selectedBoard %>&language=<%= selectedLanguage %>"
-          class="back-home-link" id="back-to-subjects-link" data-i18n="Back to Subjects">← Back to Subjects</a>
-        <h1 class="study-page-title"><span class="hero-highlight" id="subject-display">
-            <%= displaySubject || 'Subject' %>
-          </span></h1>
-      </div>
+    <!-- HEADER -->
+    <h1><%= displaySubject || 'Subject' %></h1>
 
-      <!-- CHAPTERS -->
-      <div class="chapters-section" id="chapters-section">
-        <div class="chapters-list" id="chapters-list">
-          <!-- Filled by JS -->
-        </div>
-      </div>
-
-
-
-      <!-- VIDEO PLAYER (hidden initially) -->
-      <div class="video-section" id="video-section" style="display:none;">
-        <div class="video-top-bar">
-          <button class="back-link" id="back-from-video" data-i18n="Back to Chapters">← Back to Chapters</button>
-        </div>
-        <h2 class="video-title" id="video-title">Loading...</h2>
-        <div class="video-meta" id="video-meta"></div>
-        <div class="video-wrapper" id="video-wrapper">
-          <div class="video-loader" id="video-loader">
-            <div class="loader-spinner"></div>
-            <p data-i18n="Finding the best video...">Finding the best video...</p>
-          </div>
-          <div id="video-iframe-container"
-            style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;"></div>
-        </div>
-
-
-
-        <!-- Quiz -->
-        <div class="quiz-section" id="quiz-section" style="display:none;">
-          <div class="quiz-header">
-            <span data-i18n="Quick Quiz">📝 Quick Quiz</span>
-          </div>
-          <div class="quiz-body" id="quiz-body"></div>
-          <div class="quiz-actions" id="quiz-actions" style="display:none;">
-            <button class="quiz-submit-btn" id="quiz-submit-btn" data-i18n="Submit Answers">Submit Answers</button>
-          </div>
-          <div class="quiz-result" id="quiz-result" style="display:none;"></div>
-          <button class="quiz-retake-btn" id="quiz-retake-btn" style="display:none;" data-i18n="Retake Quiz">🔄 Retake
-            Quiz</button>
-        </div>
-
-
-      </div>
-
+    <!-- CHAPTERS SECTION -->
+    <div id="chaptersSection">
+      <div id="chaptersContainer"></div>
     </div>
+
+    <!-- VIDEO SECTION -->
+    <div id="videoSection" style="display:none;">
+      <button onclick="goBack()">⬅ Back to Chapters</button>
+
+      <h2 id="videoTitle"></h2>
+
+      <iframe
+        id="videoFrame"
+        width="800"
+        height="450"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+
   </main>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <span class="footer-brand">🎓 EduStreami<span class="brand-x">x</span></span>
-      <span class="footer-copy">&copy; 2026 EduStreamix. Built for learners.</span>
-    </div>
-  </footer>
-
+  <!-- GLOBAL DATA -->
   <script>
-    window.__GRADE__ = '<%= selectedGrade || 8 %>';
-    window.__BOARD__ = '<%= selectedBoard || "CBSE" %>';
+    window.__GRADE__ = '<%= selectedGrade || 10 %>';
     window.__SUBJECT__ = '<%= selectedSubject || "" %>';
     window.__DISPLAY_SUBJECT__ = '<%= displaySubject || "" %>';
-    window.__LANGUAGE__ = '<%= selectedLanguage || "English" %>';
   </script>
-  <script src="/js/quizData.js"></script>
-  <script src="/js/i18n.js"></script>
+
+  <!-- MAIN JS -->
   <script src="/js/app.js"></script>
+
+  <!-- SIMPLE BACK FUNCTION -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const switcher = document.getElementById('nav-lang-switcher');
-      if (switcher) {
-        const lang = localStorage.getItem('appLang') || 'English';
-        switcher.value = lang;
-
-        switcher.addEventListener('change', (e) => {
-          const selected = e.target.value;
-          if (window.applyLanguage) {
-            window.applyLanguage(selected);
-          } else {
-            localStorage.setItem('appLang', selected);
-            window.location.reload();
-          }
-        });
-      }
-    });
+    function goBack() {
+      document.getElementById('videoSection').style.display = 'none';
+      document.getElementById('chaptersSection').style.display = '';
+    }
   </script>
-</body>
 
+</body>
 </html>
