@@ -1,0 +1,111 @@
+const maths = [
+    "Real Numbers",
+    "Polynomials",
+    "Pair of Linear Equations in Two Variables",
+    "Quadratic Equations",
+    "Arithmetic Progressions",
+    "Triangles",
+    "Coordinate Geometry",
+    "Introduction to Trigonometry",
+    "Trigonometric Identities",
+    "Heights and Distances",
+    "Circles",
+    "Areas Related to Circles",
+    "Surface Areas and Volumes",
+    "Statistics",
+    "Probability"
+];
+
+const science = [
+    "Chemical Reactions and Equations",
+    "Acids, Bases and Salts",
+    "Metals and Non-metals",
+    "Carbon and Its Compounds",
+    "Life Processes",
+    "Control and Coordination",
+    "How do Organisms Reproduce",
+    "Heredity and Evolution",
+    "Light – Reflection and Refraction",
+    "Human Eye and the Colourful World",
+    "Electricity",
+    "Magnetic Effects of Electric Current",
+    "Sources of Energy"
+];
+
+const socialStudies = [
+    "The Rise of Nationalism in Europe",
+    "Nationalism in India",
+    "The Making of a Global World",
+    "The Age of Industrialisation",
+    "Print Culture and the Modern World",
+    "Resources and Development",
+    "Forest and Wildlife Resources",
+    "Water Resources",
+    "Agriculture",
+    "Minerals and Energy Resources",
+    "Manufacturing Industries",
+    "Lifelines of National Economy",
+    "Power Sharing",
+    "Federalism",
+    "Gender, Religion and Caste",
+    "Political Parties",
+    "Outcomes of Democracy",
+    "Development",
+    "Sectors of the Indian Economy",
+    "Money and Credit",
+    "Globalisation and the Indian Economy",
+    "Consumer Rights"
+];
+
+const english = [
+    "A Letter to God",
+    "Nelson Mandela - Long Walk to Freedom",
+    "Stories About Flying",
+    "From the Diary of Anne Frank",
+    "Glimpses of India",
+    "Mijbil the Otter",
+    "Madam Rides the Bus",
+    "The Sermon at Benares",
+    "The Proposal (Play)",
+    "Dust of Snow",
+    "Fire and Ice",
+    "A Tiger in the Zoo",
+    "How to Tell Wild Animals",
+    "The Ball Poem",
+    "Amanda!",
+    "The Trees",
+    "Fog",
+    "The Tale of Custard the Dragon",
+    "For Anne Gregory",
+    "A Triumph of Surgery",
+    "The Thief's Story",
+    "The Midnight Visitor",
+    "A Question of Trust",
+    "Footprints Without Feet",
+    "The Making of a Scientist",
+    "The Necklace",
+    "Bholi",
+    "The Book that Saved the Earth"
+];
+
+const hindi = [
+    "सूरदास - पद",
+    "तुलसीदास - राम-लक्ष्मण-परशुराम संवाद",
+    "जयशंकर प्रसाद - आत्मकथ्य",
+    "सूर्यकांत त्रिपाठी 'निराला' - उत्साह",
+    "सूर्यकांत त्रिपाठी 'निराला' - अट नहीं रही है",
+    "नागार्जुन - यह दंतुरित मुसकान",
+    "नागार्जुन - फसल",
+    "गिरिजाकुमार माथुर - छाया मत छूना",
+    "ऋतुराज - कन्यादान",
+    "मंगलेश डबराल - संगतकार",
+    "स्वयं प्रकाश - नेताजी का चश्मा",
+    "रामवृक्ष बेनीपुरी - बालगोबिन भगत",
+    "यशपाल - लखनवी अंदाज़",
+    "मन्नू भंडारी - एक कहानी यह भी",
+    "महावीर प्रसाद द्विवेदी - स्त्री शिक्षा के विरोधी कुतर्कों का खंडन",
+    "यतींद्र मिश्र - नौबतखाने में इबादत",
+    "भदंत आनंद कौसल्यायन - संस्कृति"
+];
+
+module.exports = { maths, science, socialStudies, english, hindi };
