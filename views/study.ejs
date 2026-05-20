@@ -4,49 +4,146 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Study <%= displaySubject %> chapters distraction-free on EduStreamix." />
   <title><%= displaySubject || 'Study' %> — EduStreamix</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 
-<body>
+<body class="step-body study-body">
 
   <!-- NAVBAR -->
-  <nav>
-    <a href="/">🎓 EduStreamix</a>
-    <a href="/">Home</a>
+  <nav class="navbar scrolled" id="navbar">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">🎓</span>
+      <span class="brand-text">EduStreami<span class="brand-x">x</span></span>
+    </a>
+    <div class="nav-links">
+      <select class="nav-lang-switcher" id="nav-lang-switcher">
+        <option value="English">English</option>
+        <option value="Hindi">हिंदी</option>
+        <option value="Telugu">తెలుగు</option>
+        <option value="Tamil">தமிழ்</option>
+        <option value="Kannada">ಕನ್ನಡ</option>
+        <option value="Malayalam">മലയാളം</option>
+      </select>
+      <a href="/">Home</a>
+    </div>
   </nav>
 
-  <main>
+  <main class="study-main">
+    <div class="study-container">
 
-    <!-- HEADER -->
-    <h1><%= displaySubject || 'Subject' %></h1>
+      <!-- PROGRESS BAR -->
+      <div class="step-progress" id="step-progress">
+        <div class="step-dot completed" data-step="1">
+          <span class="step-dot-inner">1</span>
+          <span class="step-dot-label" data-i18n="Board">Board</span>
+        </div>
+        <div class="step-line filled"></div>
+        <div class="step-dot completed" data-step="2">
+          <span class="step-dot-inner">2</span>
+          <span class="step-dot-label" data-i18n="Subjects">Subjects</span>
+        </div>
+        <div class="step-line filled"></div>
+        <div class="step-dot active" data-step="3">
+          <span class="step-dot-inner">3</span>
+          <span class="step-dot-label" data-i18n="Study">Study</span>
+        </div>
+      </div>
 
-    <!-- CHAPTERS SECTION -->
-    <div id="chaptersSection">
-      <div id="chaptersContainer"></div>
+      <!-- HEADER -->
+      <div class="study-page-header">
+        <a href="/subjects?grade=<%= selectedGrade %>&board=<%= selectedBoard %>" class="back-home-link">
+          ← <span data-i18n="Back to Subjects">Back to Subjects</span>
+        </a>
+        <h1 class="study-page-title" data-i18n="<%= selectedSubject %>"><%= displaySubject %></h1>
+        <p class="study-page-desc">
+          <span data-i18n="Grade">Grade</span> <%= selectedGrade %> • <%= selectedBoard %> <span data-i18n="Syllabus">Syllabus</span>
+        </p>
+      </div>
+
+      <!-- CHAPTERS SECTION -->
+      <div id="chaptersSection" class="chapters-section">
+        <div class="chapters-header">
+          <h2 class="chapters-title" data-i18n="Course Chapters">Course Chapters</h2>
+        </div>
+        <div class="chapters-list">
+          <table class="chapters-table">
+            <thead>
+              <tr class="col-headers-row">
+                <th style="width: 120px;" data-i18n="Lesson No.">Lesson No.</th>
+                <th data-i18n="Chapter Name">Chapter Name</th>
+              </tr>
+            </thead>
+            <tbody id="chaptersContainer">
+              <!-- Chapter rows populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIDEO SECTION -->
+      <div id="videoSection" class="video-section" style="display:none;">
+        <div class="video-top-bar">
+          <button class="back-link" onclick="goBack()">
+            ← <span data-i18n="Back to Chapters">Back to Chapters</span>
+          </button>
+        </div>
+
+        <h2 id="videoTitle" class="video-title"></h2>
+
+
+
+        <div class="video-wrapper">
+          <div class="video-loader" id="videoLoader">
+            <div class="loader-spinner"></div>
+            <span data-i18n="Loading high quality video...">Loading high quality video...</span>
+          </div>
+          <iframe
+            id="videoFrame"
+            frameborder="0"
+            allowfullscreen
+            onload="document.getElementById('videoLoader').style.display = (this.src && this.src !== window.location.href) ? 'none' : 'flex';">
+          </iframe>
+        </div>
+
+        <!-- AI QUIZ SECTION -->
+        <div id="aiQuizSection" class="quiz-section" style="display: none;">
+          <div class="quiz-header">
+            <span class="ai-quiz-badge" data-i18n="AI Generated">AI Generated</span>
+            <span data-i18n="Test Your Knowledge">Test Your Knowledge</span>
+          </div>
+          <div id="quizBody" class="quiz-body">
+            <!-- Quiz content will be generated here -->
+          </div>
+          <div id="quizActions" class="quiz-actions" style="display: none;">
+            <button id="submitQuizBtn" class="quiz-submit-btn" data-i18n="Submit Answers">Submit Answers</button>
+          </div>
+          <div id="quizResult" class="quiz-result" style="display: none;"></div>
+        </div>
+        
+        <button id="generateQuizBtn" class="quiz-submit-btn" style="margin-top: 2rem;" onclick="generateQuiz()" data-i18n="Generate AI Quiz">Generate AI Quiz</button>
+
+      </div>
+
     </div>
-
-    <!-- VIDEO SECTION -->
-    <div id="videoSection" style="display:none;">
-      <button onclick="goBack()">⬅ Back to Chapters</button>
-
-      <h2 id="videoTitle"></h2>
-
-      <iframe
-        id="videoFrame"
-        width="800"
-        height="450"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
-    </div>
-
   </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">🎓 EduStreami<span class="brand-x">x</span></span>
+      <span class="footer-copy">&copy; 2026 EduStreamix. Built for learners.</span>
+    </div>
+  </footer>
 
   <!-- GLOBAL DATA -->
   <script>
     window.__GRADE__ = '<%= selectedGrade || 10 %>';
+    window.__BOARD__ = '<%= selectedBoard || "" %>';
     window.__SUBJECT__ = '<%= selectedSubject || "" %>';
     window.__DISPLAY_SUBJECT__ = '<%= displaySubject || "" %>';
   </script>
@@ -54,11 +151,31 @@
   <!-- MAIN JS -->
   <script src="/js/app.js"></script>
 
-  <!-- SIMPLE BACK FUNCTION -->
+  <!-- LANGUAGE SWITCHER & BACK FUNCTION -->
+  <script src="/js/i18n.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const switcher = document.getElementById('nav-lang-switcher');
+      if (switcher) {
+        const lang = localStorage.getItem('appLang') || 'English';
+        switcher.value = lang;
+
+        switcher.addEventListener('change', (e) => {
+          const selected = e.target.value;
+          if (window.applyLanguage) {
+            window.applyLanguage(selected);
+          } else {
+            localStorage.setItem('appLang', selected);
+            window.location.reload();
+          }
+        });
+      }
+    });
+
     function goBack() {
       document.getElementById('videoSection').style.display = 'none';
       document.getElementById('chaptersSection').style.display = '';
+      document.getElementById('videoFrame').src = '';
     }
   </script>
 
