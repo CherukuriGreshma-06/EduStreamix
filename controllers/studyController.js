@@ -165,11 +165,20 @@ exports.getChapters = async (req, res) => {
   }
 
   // 3. Fallback: return default chapters when DB is unavailable or not seeded
+  const defaultList = _getDefaultChapters(subject, gradeNum, boardUp);
+  const formattedChapters = defaultList.map((name, index) => ({
+    unitName: 'General',
+    lessonNo: String(index + 1),
+    chapterName: name,
+    type: 'Video',
+    link: null
+  }));
+
   res.json({
     grade: gradeNum,
     board: boardUp,
     subject,
-    chapters: _getDefaultChapters(subject, gradeNum, boardUp)
+    chapters: formattedChapters
   });
 };
 
