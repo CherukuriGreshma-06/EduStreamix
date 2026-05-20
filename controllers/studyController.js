@@ -144,17 +144,25 @@ exports.getChapters = async (req, res) => {
       const chapters = [];
       doc.units.forEach(unit => {
         unit.chapters.forEach(ch => {
+          // Extract the first available video link (embedUrl or youtubeVideoId)
+          let link = null;
+          if (ch.videos && ch.videos.length > 0) {
+            const vid = ch.videos[0];
+            link = vid.embedUrl || (vid.youtubeVideoId ? `https://www.youtube.com/embed/${vid.youtubeVideoId}` : null);
+          }
+
           chapters.push({
             unitName: unit.unitName,
             lessonNo: ch.lessonNo,
             chapterName: ch.chapterName,
-            type: ch.type,
+            type: link ? 'Video' : (ch.type || 'Topic'),
+            link: link,
             pdfUrl: ch.pdfUrl,
             pdfTitle: ch.pdfTitle,
             keyMoments: ch.keyMoments,
             quizQuestions: ch.quizQuestions,
             summary: ch.summary,
-            originalChapterName: ch.chapterName // Keep original for video fetching
+            originalChapterName: ch.chapterName
           });
         });
       });
