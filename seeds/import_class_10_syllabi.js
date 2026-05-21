@@ -1,36 +1,11 @@
-require('dotenv').config();
-
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
-const Video = require('../models/Video');
 
 const SOURCE_FILES = [
-  {
-    board: 'CBSE',
-    collection: 'CBSE_Syllabi',
-    file: path.join(__dirname, 'CBSE_Video.json')
-  },
-  {
-    board: 'SSC',
-    collection: 'SSC_Syllabi',
-    file: path.join(__dirname, 'SSC_Video.json')
-  },
-  {
-    board: 'ICSE',
-    collection: 'ICSE_Syllabi',
-    file: path.join(__dirname, 'ICSE_Video.json')
-  }
+  { board: 'CBSE', file: path.join(__dirname, 'CBSE_Video.json') },
+  { board: 'SSC', file: path.join(__dirname, 'SSC_Video.json') },
+  { board: 'ICSE', file: path.join(__dirname, 'ICSE_Video.json') }
 ];
-
-const LANGUAGE_NAMES = {
-  en: 'English',
-  hi: 'Hindi',
-  te: 'Telugu',
-  ta: 'Tamil',
-  kn: 'Kannada',
-  ml: 'Malayalam'
-};
 
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) {
@@ -40,84 +15,36 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-function toSyllabusDoc(rawDoc) {
-  return {
-    grade: Number(rawDoc.grade),
-    subject: rawDoc.subject,
-    units: (rawDoc.units || []).map(unit => ({
-      name: unit.name || unit.chapterName || unit.unitName || 'Chapter',
-      resources: (unit.resources || [])
-        .map(resource => ({
-          link: resource.link,
-          lang: resource.lang || 'en',
-          isOriginal: Boolean(resource.isOriginal)
-        }))
-        .filter(resource => resource.link)
-    }))
-  };
-}
+function validateBoard({ board, file }) {
+  const docs = readJson(file);
+  let chapterCount = 0;
+  let videoCount = 0;
 
-function toVideoDocs(board, syllabusDoc) {
-  const videos = [];
+  for (const doc of docs) {
+    if (!doc.grade || !doc.subject || !Array.isArray(doc.units)) {
+      throw new Error(`${board}: invalid subject document in ${path.basename(file)}`);
+    }
 
-  for (const unit of syllabusDoc.units || []) {
-    for (const resource of unit.resources || []) {
-      videos.push({
-        grade: String(syllabusDoc.grade),
-        board,
-        subject: syllabusDoc.subject,
-        chapter: unit.name,
-        url: resource.link,
-        language: LANGUAGE_NAMES[resource.lang] || resource.lang || 'English'
-      });
+    for (const unit of doc.units) {
+      if (!unit.name) {
+        throw new Error(`${board}: chapter is missing a name in ${doc.subject}`);
+      }
+
+      chapterCount += 1;
+      videoCount += (unit.resources || []).filter(resource => resource.link).length;
     }
   }
 
-  return videos;
+  console.log(`${board}: ${docs.length} subjects, ${chapterCount} chapters, ${videoCount} videos`);
 }
 
-async function importBoard({ board, collection, file }) {
-  const sourceDocs = readJson(file).map(toSyllabusDoc);
-  const collectionHandle = mongoose.connection.db.collection(collection);
-
-  await collectionHandle.deleteMany({ grade: 10 });
-  if (sourceDocs.length) {
-    await collectionHandle.insertMany(sourceDocs);
-  }
-
-  const videoDocs = sourceDocs.flatMap(doc => toVideoDocs(board, doc));
-  await Video.deleteMany({ grade: '10', board });
-  if (videoDocs.length) {
-    await Video.insertMany(videoDocs);
-  }
-
-  const chapterCount = sourceDocs.reduce((sum, doc) => sum + (doc.units || []).length, 0);
-  console.log(`${board}: imported ${sourceDocs.length} subjects, ${chapterCount} chapters, ${videoDocs.length} videos`);
-}
-
-async function main() {
-  if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI is missing. Add it to .env before importing videos.');
-  }
-
-  console.log('Connecting to MongoDB...');
-  await mongoose.connect(process.env.MONGO_URI);
-
+try {
   for (const source of SOURCE_FILES) {
-    console.log(`Reading ${path.basename(source.file)}...`);
-    await importBoard(source);
+    validateBoard(source);
   }
 
-  await mongoose.disconnect();
-  console.log('Class 10 video import complete.');
-}
-
-main().catch(async error => {
-  console.error('Import failed:', error.message);
-  try {
-    await mongoose.disconnect();
-  } catch (_) {
-    // Ignore disconnect errors during failure cleanup.
-  }
+  console.log('Local Class 10 data is ready. No MongoDB import is needed.');
+} catch (error) {
+  console.error('Validation failed:', error.message);
   process.exit(1);
-});
+}
