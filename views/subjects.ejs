@@ -17,7 +17,7 @@
       <span class="brand-icon">🎓</span>
       <span class="brand-text">EduStreami<span class="brand-x">x</span></span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links nav-actions">
       <select class="nav-lang-switcher" id="nav-lang-switcher">
         <option value="English">English</option>
         <option value="Hindi">हिंदी</option>
@@ -26,7 +26,10 @@
         <option value="Kannada">ಕನ್ನಡ</option>
         <option value="Malayalam">മലയാളം</option>
       </select>
-      <a href="/">Home</a>
+      <a href="/" class="nav-home-btn" aria-label="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9A1.5 1.5 0 0 1 19.5 21h-5v-6h-5v6h-5A1.5 1.5 0 0 1 3 19.5v-9Z"/></svg>
+        <span>Home</span>
+      </a>
     </div>
   </nav>
 
@@ -46,13 +49,17 @@
       </div>
 
       <div class="step-header">
-        <a href="/boards?grade=<%= selectedGrade %>" class="back-step-link" id="back-to-boards" data-i18n="Back to Boards">← Back to Boards</a>
-        <h1 class="step-title"><span class="hero-highlight" data-i18n="Subjects">Subjects</span></h1>
-        <p class="step-subtitle" data-i18n="Pick a subject to explore chapters and start watching">Pick a subject to explore chapters and start watching</p>
+        <h1 class="step-title"><span class="hero-highlight" data-i18n="Choose Your Subject">Choose Your Subject</span></h1>
+        <p class="step-subtitle strong-subtitle" data-i18n="Pick a subject to explore chapters and start watching">Pick a subject to explore chapters and start watching</p>
       </div>
 
       <div class="subjects-grid" id="subjects-grid">
         <!-- Filled by JS -->
+      </div>
+
+      <div class="bottom-nav">
+        <a href="/boards?grade=<%= selectedGrade %>" class="flow-btn">Back</a>
+        <button type="button" class="flow-btn flow-btn-disabled" disabled>Next</button>
       </div>
 
     </div>

@@ -73,17 +73,8 @@ async function showChapters(apiUrl) {
     });
     tdTitle.appendChild(titleLink);
 
-    const tdLink = document.createElement('td');
-    tdLink.className = 'col-link';
-    if (ch.link) {
-      tdLink.innerHTML = `<a href="${ch.link}" target="_blank" rel="noopener">Watch</a>`;
-    } else {
-      tdLink.innerHTML = '<span>-</span>';
-    }
-
     tr.appendChild(tdLesson);
     tr.appendChild(tdTitle);
-    tr.appendChild(tdLink);
     container.appendChild(tr);
   });
 }
@@ -127,6 +118,8 @@ async function showVideoMode(currentChapterData) {
 
     hideAllSections();
     videoSection.style.display = '';
+    const chaptersBottomNav = document.getElementById('chaptersBottomNav');
+    if (chaptersBottomNav) chaptersBottomNav.style.display = 'none';
     title.innerText = "Loading video...";
     iframe.src = "";
 
@@ -190,18 +183,38 @@ function renderVideo() {
   hideAllSections();
 
   videoSection.style.display = '';
+  const chaptersBottomNav = document.getElementById('chaptersBottomNav');
+  if (chaptersBottomNav) chaptersBottomNav.style.display = 'none';
 
   const iframe = document.getElementById('videoFrame');
   const title = document.getElementById('videoTitle');
+  const aiQuizSection = document.getElementById('aiQuizSection');
+  const quizBody = document.getElementById('quizBody');
+  const quizActions = document.getElementById('quizActions');
+  const quizResult = document.getElementById('quizResult');
+  const generateBtn = document.getElementById('generateQuizBtn');
 
   iframe.src = `https://www.youtube.com/embed/${videoData.youtubeVideoId}`;
   title.innerText = videoData.title;
+  currentQuizData = null;
+  if (aiQuizSection) aiQuizSection.style.display = 'none';
+  if (quizBody) quizBody.innerHTML = '';
+  if (quizActions) quizActions.style.display = 'none';
+  if (quizResult) quizResult.style.display = 'none';
+  if (generateBtn) {
+    generateBtn.disabled = false;
+    generateBtn.classList.remove('is-loading');
+    generateBtn.innerText = 'Generate Quiz';
+    generateBtn.style.display = 'flex';
+  }
 }
 
 // ---------------- HELPERS ----------------
 function hideAllSections() {
   chaptersSection.style.display = 'none';
   videoSection.style.display = 'none';
+  const chaptersBottomNav = document.getElementById('chaptersBottomNav');
+  if (chaptersBottomNav) chaptersBottomNav.style.display = 'none';
 }
 
 // ---------------- INITIALIZATION ----------------
@@ -231,7 +244,9 @@ async function generateQuiz() {
   const appLang = localStorage.getItem('appLang') || 'English';
   const chapterName = videoData ? videoData.title.split(' — ')[0] : 'General Topic';
 
-  generateBtn.style.display = 'none';
+  generateBtn.disabled = true;
+  generateBtn.classList.add('is-loading');
+  generateBtn.innerText = 'Generating...';
   aiQuizSection.style.display = 'block';
   quizActions.style.display = 'none';
   quizResult.style.display = 'none';
@@ -261,7 +276,10 @@ async function generateQuiz() {
 
     if (data.error) {
       quizBody.innerHTML = `<p style="color:red;">Error: ${data.message}</p>`;
-      generateBtn.style.display = 'block';
+      generateBtn.disabled = false;
+      generateBtn.classList.remove('is-loading');
+      generateBtn.innerText = 'Generate Quiz';
+      generateBtn.style.display = 'flex';
       return;
     }
 
@@ -271,7 +289,10 @@ async function generateQuiz() {
   } catch (err) {
     console.error(err);
     quizBody.innerHTML = `<p style="color:red;">Failed to generate quiz. Please try again.</p>`;
-    generateBtn.style.display = 'block';
+    generateBtn.disabled = false;
+    generateBtn.classList.remove('is-loading');
+    generateBtn.innerText = 'Generate Quiz';
+    generateBtn.style.display = 'flex';
   }
 }
 
@@ -304,6 +325,12 @@ function renderQuiz(questions) {
 
   quizBody.innerHTML = html;
   quizActions.style.display = 'block';
+  const generateBtn = document.getElementById('generateQuizBtn');
+  if (generateBtn) {
+    generateBtn.disabled = false;
+    generateBtn.classList.remove('is-loading');
+    generateBtn.style.display = 'none';
+  }
 
   document.getElementById('submitQuizBtn').onclick = submitQuiz;
 }
@@ -349,6 +376,6 @@ function submitQuiz() {
   quizResult.className = `quiz-result ${resultClass}`;
   quizResult.innerHTML = `You scored ${score} out of ${questions.length}!`;
   
-  generateBtn.innerText = 'Generate Another Quiz';
-  generateBtn.style.display = 'block';
+  generateBtn.innerText = 'Generate Quiz';
+  generateBtn.style.display = 'flex';
 }

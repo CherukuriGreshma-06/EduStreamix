@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Select your board — SSC, CBSE, or ICSE — on EduStreamix." />
-  <title>Select Board — EduStreamix</title>
+  <title>Select Your Board — EduStreamix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -17,7 +17,7 @@
       <span class="brand-icon">🎓</span>
       <span class="brand-text">EduStreami<span class="brand-x">x</span></span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links nav-actions">
       <select class="nav-lang-switcher" id="nav-lang-switcher">
         <option value="English">English</option>
         <option value="Hindi">हिंदी</option>
@@ -26,28 +26,19 @@
         <option value="Kannada">ಕನ್ನಡ</option>
         <option value="Malayalam">മലയാളം</option>
       </select>
-      <a href="/">Home</a>
+      <a href="/" class="nav-home-btn" aria-label="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9A1.5 1.5 0 0 1 19.5 21h-5v-6h-5v6h-5A1.5 1.5 0 0 1 3 19.5v-9Z"/></svg>
+        <span>Home</span>
+      </a>
     </div>
   </nav>
 
   <main class="step-main">
     <div class="step-container">
 
-      <div class="step-progress" id="step-progress">
-        <div class="step-dot active" data-step="1">
-          <span class="step-dot-inner">1</span>
-          <span class="step-dot-label">Board</span>
-        </div>
-        <div class="step-line"></div>
-        <div class="step-dot" data-step="2">
-          <span class="step-dot-inner">2</span>
-          <span class="step-dot-label">Subjects</span>
-        </div>
-      </div>
-
       <div class="step-header">
-        <h1 class="step-title"><span data-i18n="Select Board">Select Board</span></h1>
-        <p class="step-subtitle" data-i18n="Choose your education board to see relevant subjects">Choose your education board to see relevant subjects</p>
+        <h1 class="step-title"><span data-i18n="Select Your Board">Select Your Board</span></h1>
+        <p class="step-subtitle strong-subtitle" data-i18n="Choose your education board to see relevant subjects">Choose your education board to see relevant subjects</p>
       </div>
 
       <div class="board-grid" id="board-grid">
@@ -72,6 +63,11 @@
           <p class="board-card-label" data-i18n="Indian Certificate">Indian Certificate</p>
           <span class="board-card-arrow">→</span>
         </a>
+      </div>
+
+      <div class="bottom-nav">
+        <a href="/" class="flow-btn">Back</a>
+        <button type="button" class="flow-btn flow-btn-disabled" disabled>Next</button>
       </div>
 
     </div>

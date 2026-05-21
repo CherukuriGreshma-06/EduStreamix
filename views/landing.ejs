@@ -13,8 +13,12 @@
 <body class="landing-body">
 
   <nav class="navbar" id="navbar">
-    <div class="nav-links">
-      <a href="#features">Why EduStreamix</a>
+    <div></div>
+    <div class="nav-links nav-actions">
+      <a href="/" class="nav-home-btn" aria-label="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9A1.5 1.5 0 0 1 19.5 21h-5v-6h-5v6h-5A1.5 1.5 0 0 1 3 19.5v-9Z"/></svg>
+        <span>Home</span>
+      </a>
     </div>
   </nav>
 
@@ -38,10 +42,9 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
-
     <div class="hero-content">
       <p class="hero-tagline">The distraction-free platform</p>
-      <p class="hero-subtitle" style="font-family: 'Lucida Handwriting', 'Lucida Bright', cursive; font-size: 1.4rem; font-weight: 500;">
+      <p class="hero-subtitle">
         EduStreamix is your focused learning space—where content is organized,
         distractions are minimized, and learning becomes effective.
       </p>
@@ -63,11 +66,6 @@
         <h3>Distraction-Free</h3>
         <p>No ads, no recommendations, no rabbit holes. Videos play right here — clean, focused, and controlled.</p>
       </div>
-      <div class="feature-card" id="feature-2">
-        <div class="feature-icon-wrap"><div class="feature-icon">⚡</div></div>
-        <h3>Smart Ranking</h3>
-        <p>Our algorithm picks the best video for each topic using view counts, likes, and embeddability.</p>
-      </div>
       <div class="feature-card" id="feature-3">
         <div class="feature-icon-wrap"><div class="feature-icon">📚</div></div>
         <h3>Organized Content</h3>
@@ -87,6 +85,9 @@
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
     });
+    window.setTimeout(() => {
+      window.location.href = '/boards?grade=10';
+    }, 3000);
   </script>
 </body>
 </html>
