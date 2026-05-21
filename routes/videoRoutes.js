@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const videoController = require('../controllers/videoController');
+const studyCtrl = require('../controllers/studyController');
 
-// GET /getVideo?chapter=chapterName
-router.get('/getVideo', videoController.getVideo);
+// Video API route
+router.get('/video', studyCtrl.getVideo);
 
 module.exports = router;

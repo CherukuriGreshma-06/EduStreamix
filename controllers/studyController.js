@@ -10,6 +10,14 @@ const path = require('path');
 const translate = require('google-translate-api-x');
 const mongoose = require('mongoose');
 
+function _escapeRegex(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function _normalizeString(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
 // ── Curriculum mapping (example subjects per class + board) ──
 const CURRICULUM = {
   10: {
@@ -109,26 +117,45 @@ exports.getChapters = async (req, res) => {
       dbSubject = 'History & Civics';
     }
 
+    const subjectRegex = new RegExp(`^${_escapeRegex(dbSubject)}$`, 'i');
+
     // 1. Try to fetch from the new CBSE_Syllabi or SSC_Syllabi collections first
     const collectionName = boardUp + '_Syllabi';
     if (mongoose.connection && mongoose.connection.db) {
       const collection = mongoose.connection.db.collection(collectionName);
-      const doc = await collection.findOne({ grade: gradeNum, subject: dbSubject });
+      const doc = await collection.findOne({ grade: gradeNum, subject: subjectRegex });
       
       if (doc && doc.units && doc.units.length > 0) {
         const chapters = [];
         doc.units.forEach((unit, i) => {
-          let link = null;
-          if (unit.resources && unit.resources.length > 0) {
-            link = unit.resources[0].link; // Pick the first resource link
+          if (unit.chapters && unit.chapters.length > 0) {
+            unit.chapters.forEach((ch, j) => {
+              let link = null;
+              if (ch.videos && ch.videos.length > 0) {
+                const vid = ch.videos[0];
+                link = vid.embedUrl || (vid.youtubeVideoId ? `https://www.youtube.com/embed/${vid.youtubeVideoId}` : null);
+              }
+              chapters.push({
+                unitName: unit.unitName || unit.name || 'General',
+                lessonNo: ch.lessonNo || String(j + 1),
+                chapterName: ch.chapterName || ch.name || 'Chapter ' + (j + 1),
+                type: link ? 'Video' : (ch.type || 'Topic'),
+                link
+              });
+            });
+          } else {
+            let link = null;
+            if (unit.resources && unit.resources.length > 0) {
+              link = unit.resources[0].link;
+            }
+            chapters.push({
+              unitName: unit.unitName || unit.name || 'General',
+              lessonNo: String(i + 1),
+              chapterName: unit.name || unit.chapterName || 'Chapter ' + (i + 1),
+              type: link ? 'Video' : 'Topic',
+              link
+            });
           }
-          chapters.push({
-            unitName: 'General',
-            lessonNo: String(i + 1),
-            chapterName: unit.name,
-            type: link ? 'Video' : 'Topic',
-            link: link // Custom property for the frontend
-          });
         });
         return res.json({ grade: gradeNum, board: boardUp, subject, chapters });
       }
@@ -136,7 +163,7 @@ exports.getChapters = async (req, res) => {
 
     // 2. Fallback to the original Subject schema
     const doc = await Subject.findOne(
-      { grade: gradeNum, board: boardUp, subject },
+      { grade: gradeNum, board: boardUp, subject: subjectRegex },
       { 'units.unitName': 1, 'units.chapters.lessonNo': 1, 'units.chapters.chapterName': 1, 'units.chapters.type': 1, 'units.chapters.pdfUrl': 1, 'units.chapters.pdfTitle': 1, 'units.chapters.keyMoments': 1, 'units.chapters.quizQuestions': 1, 'units.chapters.summary': 1, 'units.chapters.videos': 1 }
     ).lean();
 
@@ -207,11 +234,13 @@ exports.getVideo = async (req, res) => {
 
   // ── 0. Check the new Video model first (Highest Priority) ──
   try {
+    const subjectRegex = new RegExp(`^${_escapeRegex(subject)}$`, 'i');
+    const chapterRegex = new RegExp(`^${_escapeRegex(chapter)}$`, 'i');
     const directVideo = await Video.findOne({ 
       grade: String(gradeNum), 
       board: board ? board.toUpperCase() : 'SSC', 
-      subject: subject,
-      chapter: chapter 
+      subject: subjectRegex,
+      chapter: chapterRegex 
     });
     if (directVideo) {
       // Extract video ID from URL if possible
@@ -237,17 +266,19 @@ exports.getVideo = async (req, res) => {
   // ── 1. Check MongoDB Subject cache ─────────────
   try {
     if (board && subject) {
+      const subjectRegex = new RegExp(`^${_escapeRegex(subject)}$`, 'i');
       const doc = await Subject.findOne({
         grade: gradeNum,
         board: board.toUpperCase(),
-        subject
-      });
+        subject: subjectRegex
+      }).lean();
 
       if (doc) {
-        for (const unit of doc.units) {
-          for (const ch of unit.chapters) {
-            if (ch.chapterName === chapter) {
-              const cached = ch.videos.find(v => v.language === language);
+        const normalizedChapter = _normalizeString(chapter);
+        for (const unit of doc.units || []) {
+          for (const ch of unit.chapters || []) {
+            if (_normalizeString(ch.chapterName) === normalizedChapter) {
+              const cached = (ch.videos || []).find(v => v.language === language);
               if (cached && cached.youtubeVideoId) {
                 return res.json({
                   cached: true,

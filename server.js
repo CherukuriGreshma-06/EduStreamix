@@ -1,65 +1,45 @@
-/* ──────────────────────────────────────────────
-   EduStreamix — Server Entry Point
-   ────────────────────────────────────────────── */
-
 require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const connectDB = require('./config/db');
+
 const studyRoutes = require('./routes/studyRoutes');
 const videoRoutes = require('./routes/videoRoutes');
-
-// ── Global Error Protection ─────────────────
-process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
-});
-
-process.on("unhandledRejection", (err) => {
-  console.error("Unhandled Rejection:", err);
-});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ── Connect to MongoDB ──────────────────────
+// ── DB CONNECT ──
 connectDB();
 
-// ── Middleware ───────────────────────────────
+// ── MIDDLEWARE ──
 app.use(cors());
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ── Routes ──────────────────────────────────
-app.use('/', studyRoutes);
-app.use('/', videoRoutes);
+// ── VIEW ENGINE ──
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-// ── 404 Handler ─────────────────────────────
+// ── ROUTES ──
+app.use('/', studyRoutes);
+app.use('/api', videoRoutes);
+
+// ── 404 ──
 app.use((req, res) => {
   res.status(404).render('landing', { error: 'Page not found' });
 });
 
-// ── Global Error Handler ────────────────────
+// ── ERROR HANDLER ──
 app.use((err, req, res, next) => {
-  console.error('Server error:', err.stack);
+  console.error(err);
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// ── Start Server ────────────────────────────
-const server = app.listen(PORT, () => {
-  console.log(`\n🚀 EduStreamix is running at http://localhost:${PORT}\n`);
-});
-
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`Port ${PORT} is in use. Trying port ${PORT + 1}...`);
-    app.listen(PORT + 1, () => {
-      console.log(`\n🚀 EduStreamix is running at http://localhost:${PORT + 1}\n`);
-    });
-  } else {
-    console.error("Server Error:", err);
-  }
+// ── START SERVER ──
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

@@ -15,6 +15,11 @@ async function getFinalChapters(apiUrl, cacheKey) {
 
     console.log("API DATA:", data);
 
+    if (data.error) {
+      console.error('Chapters API error:', data.error);
+      return [];
+    }
+
     // Case 1: { chapters: [...] }
     if (data.chapters) {
       sessionStorage.setItem(cacheKey, JSON.stringify(data.chapters));
@@ -58,10 +63,27 @@ async function showChapters(apiUrl) {
 
     const tdTitle = document.createElement('td');
     tdTitle.className = 'col-title';
-    tdTitle.innerText = ch.chapterName;
+    // Create clickable link for chapter name
+    const titleLink = document.createElement('a');
+    titleLink.href = '#';
+    titleLink.innerText = ch.chapterName;
+    titleLink.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent row click
+      showVideoMode(ch);
+    });
+    tdTitle.appendChild(titleLink);
+
+    const tdLink = document.createElement('td');
+    tdLink.className = 'col-link';
+    if (ch.link) {
+      tdLink.innerHTML = `<a href="${ch.link}" target="_blank" rel="noopener">Watch</a>`;
+    } else {
+      tdLink.innerHTML = '<span>-</span>';
+    }
 
     tr.appendChild(tdLesson);
     tr.appendChild(tdTitle);
+    tr.appendChild(tdLink);
     container.appendChild(tr);
   });
 }
@@ -110,6 +132,12 @@ async function showVideoMode(currentChapterData) {
 
     const res = await fetch(url);
     const data = await res.json();
+
+    if (data?.error) {
+      alert(data.error || "No video found for this chapter.");
+      goBack();
+      return;
+    }
 
     if (data && data.video) {
       const vid = data.video;
