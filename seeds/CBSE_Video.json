@@ -1,0 +1,995 @@
+[{
+  "_id": {
+    "$oid": "69fc32e75a4452261814395a"
+  },
+  "grade": 10,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "name": "Real Numbers",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Haz0_mt4loc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Polynomials",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Vd1OjVX3VZE",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Pair of Linear Equations in Two Variables",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/HL1tfxf8Ogk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Quadratic Equations",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/JaSkjy8AOts",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Arithmetic Progressions",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/zPKdZKBG4oQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Triangles",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/K6GHByiwrdU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Coordinate Geometry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/-fhFbv2t8NY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Introduction to Trigonometry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/vRgJ1QbOXz4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Trigonometric Identities",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/GgRrwhnCGCE",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Heights and Distances",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/QmDhai2fKzk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Circles",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/jCF0q0YQD7Y",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Areas Related to Circles",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ZsYmp8z0Wzg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Surface Areas and Volumes",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/eCGpJVYMJsw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Nsr4RcwQjzc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Probability",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/NwwT_moO9Lk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "69fc35a95a4452261814395b"
+  },
+  "grade": 10,
+  "subject": "Science",
+  "units": [
+    {
+      "name": "Chemical Reactions and Equations",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/AEyJ0MpddzQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Acids, Bases and Salts",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/zv1-ZuLSskQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Metals and Non-metals",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/V67eJZ5YFsQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Carbon and Its Compounds",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/hpw0ot17TOc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Life Processes",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/JzihOwFW3gI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Control and Coordination",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/vaHr0tVHdIk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "How do Organisms Reproduce",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/FYFTWAZiMGw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Heredity and Evolution",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/as157ZmxHzM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Light – Reflection and Refraction",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/8iVoxtEYJeM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Human Eye and the Colourful World",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Me5ehNcvULw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Electricity",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Bo7QU4nxdfw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Magnetic Effects of Electric Current",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/hUIw4H_kt50",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Sources of Energy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/dk4zyqH8dvM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "69fc36755a4452261814395c"
+  },
+  "grade": 10,
+  "subject": "Social Studies",
+  "units": [
+    {
+      "name": "The Rise of Nationalism in Europe",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/gdm0ryAkj4M",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Nationalism in India",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/tma1JFPzGUI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Making of a Global World",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/76CzunlkMHw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Age of Industrialisation",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/MOqAV_GYu7U",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Print Culture and the Modern World",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/rYSlBo-FOW8",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Resources and Development",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/qrsUXdc1CDk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Forest and Wildlife Resources",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/qowdD1ebuII",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Water Resources",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/OgLrXLAaxeI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Agriculture",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/IdrzKKepSh4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Minerals and Energy Resources",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/n_DzWSvY17E",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Manufacturing Industries",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/k9FSa2TF6vg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Lifelines of National Economy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/9z_XprHq7Nk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Power Sharing",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/h7Yck4qyng4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Federalism",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/E-rFmT_2CSs",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Gender, Religion and Caste",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Bun48Jbzgvs",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Political Parties",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/rpt8Ri78RFc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Outcomes of Democracy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/duHcGYE834c",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Development",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/xD9JXbzOrmw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Sectors of the Indian Economy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/lW-LZELxkxk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Money and Credit",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/tI0JvUNF6Lk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Globalisation and the Indian Economy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/a964mXcRCfw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Consumer Rights",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/7y6eTschM_Q",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "69fc37355a4452261814395d"
+  },
+  "grade": 10,
+  "subject": "English",
+  "units": [
+    {
+      "name": "A Letter to God",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/6BIskviDogA",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Nelson Mandela - Long Walk to Freedom",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/eQJK8auAKiQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Stories About Flying",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/XXrwWBloYmM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "From the Diary of Anne Frank",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/P8iWPqdtOLM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Glimpses of India",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/V5Wn7W_tP2s",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Mijbil the Otter",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Wg7bzo8-pmQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Madam Rides the Bus",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/1_CucN0gPUk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Sermon at Benares",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ELPGR9mFxQM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Proposal (Play)",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/mZ1ZZR_8gLQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Dust of Snow",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/5gyDFbkkJgE",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Fire and Ice",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/wkPxfwrEJfI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "A Tiger in the Zoo",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/57GNadICaQ8",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "How to Tell Wild Animals",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/0Jmvy3sxFUQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Ball Poem",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/8a_KwknDkh4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Amanda!",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/CrlE1lmzcdw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Trees",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/tZDMIH_rieg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Fog",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/8pevdNSCrKw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Tale of Custard the Dragon",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/NkEG7DxFeLQ",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "For Anne Gregory",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/0CbbXZzS6_M",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "A Triumph of Surgery",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/gUhzVc2S0aM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Thief's Story",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/xzXCGYbnHh4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Midnight Visitor",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/AeWcjzZvr9k",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "A Question of Trust",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/G-oeIC2NmA8",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Footprints Without Feet",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ERh44HYxbXI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Making of a Scientist",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/St3wuLunb30",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Necklace",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/KsjzjJe-9UI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Bholi",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/1CSueC3gRRU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Book that Saved the Earth",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Tdnjh1WEStA",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "69fc38065a4452261814395e"
+  },
+  "grade": 10,
+  "subject": "Hindi",
+  "units": [
+    {
+      "name": "सूरदास - पद",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/FQWdip218PA",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "तुलसीदास - राम-लक्ष्मण-परशुराम संवाद",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ahZgrkviA8Y",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "जयशंकर प्रसाद - आत्मकथ्य",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/6j9MhUAjmiM",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "सूर्यकांत त्रिपाठी 'निराला' - उत्साह",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Kq3NWbRa57Y",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "सूर्यकांत त्रिपाठी 'निराला' - अट नहीं रही है",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/FexpDRZCDTQ",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "नागार्जुन - यह दंतुरित मुसकान",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/wgsuTArR-wg",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "नागार्जुन - फसल",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/4vtWDOPKGHk",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "गिरिजाकुमार माथुर - छाया मत छूना",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/9YnBwlZD2Ps",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "ऋतुराज - कन्यादान",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/StdelrsRM_g",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "मंगलेश डबराल - संगतकार",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/_M7rGhzIqIw",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "स्वयं प्रकाश - नेताजी का चश्मा",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/gfbVZjtcZ_c",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "रामवृक्ष बेनीपुरी - बालगोबिन भगत",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/VpzIJ2FPcY0",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "यशपाल - लखनवी अंदाज़",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/sEWI6ptNivQ",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "मन्नू भंडारी - एक कहानी यह भी",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/TG9wnjJYMP0",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "महावीर प्रसाद द्विवेदी - स्त्री शिक्षा के विरोधी कुतर्कों का खंडन",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/xQqqeF-CHrQ",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "यतींद्र मिश्र - नौबतखाने में इबादत",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/3yQ7dTJU7gA",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "भदंत आनंद कौसल्यायन - संस्कृति",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/4JmmvHXee2U",
+          "lang": "hi",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+}]

@@ -9,17 +9,17 @@ const SOURCE_FILES = [
   {
     board: 'CBSE',
     collection: 'CBSE_Syllabi',
-    file: 'C:/Users/Greshma/OneDrive/Documents/EduStreamX.CBSE_Syllabi.json'
+    file: path.join(__dirname, 'CBSE_Video.json')
   },
   {
     board: 'SSC',
     collection: 'SSC_Syllabi',
-    file: 'C:/Users/Greshma/OneDrive/Documents/EduStreamX.SSC_Syllabi.json'
+    file: path.join(__dirname, 'SSC_Video.json')
   },
   {
     board: 'ICSE',
     collection: 'ICSE_Syllabi',
-    file: 'C:/Users/Greshma/OneDrive/Documents/EduStreamX.ICSE_Syllabi.json'
+    file: path.join(__dirname, 'ICSE_Video.json')
   }
 ];
 
@@ -46,11 +46,13 @@ function toSyllabusDoc(rawDoc) {
     subject: rawDoc.subject,
     units: (rawDoc.units || []).map(unit => ({
       name: unit.name || unit.chapterName || unit.unitName || 'Chapter',
-      resources: (unit.resources || []).map(resource => ({
-        link: resource.link,
-        lang: resource.lang || 'en',
-        isOriginal: Boolean(resource.isOriginal)
-      })).filter(resource => resource.link)
+      resources: (unit.resources || [])
+        .map(resource => ({
+          link: resource.link,
+          lang: resource.lang || 'en',
+          isOriginal: Boolean(resource.isOriginal)
+        }))
+        .filter(resource => resource.link)
     }))
   };
 }
@@ -60,8 +62,6 @@ function toVideoDocs(board, syllabusDoc) {
 
   for (const unit of syllabusDoc.units || []) {
     for (const resource of unit.resources || []) {
-      if (!resource.link) continue;
-
       videos.push({
         grade: String(syllabusDoc.grade),
         board,
@@ -97,7 +97,7 @@ async function importBoard({ board, collection, file }) {
 
 async function main() {
   if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI is missing. Add it to .env before importing syllabi.');
+    throw new Error('MONGO_URI is missing. Add it to .env before importing videos.');
   }
 
   console.log('Connecting to MongoDB...');
@@ -109,7 +109,7 @@ async function main() {
   }
 
   await mongoose.disconnect();
-  console.log('Class 10 syllabi import complete.');
+  console.log('Class 10 video import complete.');
 }
 
 main().catch(async error => {

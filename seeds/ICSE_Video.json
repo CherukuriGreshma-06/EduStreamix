@@ -1,0 +1,732 @@
+[{
+  "_id": {
+    "$oid": "6a034c04296d203c20c284a1"
+  },
+  "grade": 10,
+  "subject": "Physics",
+  "units": [
+    {
+      "name": "Force",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/IH0IfLAEdfs",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Work, Power and Energy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/BmCVIiVMIr0",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Light",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/8Rwv2hvdZFo",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Sound",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/BRnmJ_K6Das",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Electricity",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ISKTBbBNSoU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Electromagnetism",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/NUINeG9NzPE",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Heat",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/La-2TxGmrGE",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Modern Physics",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/rxGOaMAGpP4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035bd8296d203c20c284a3"
+  },
+  "grade": 10,
+  "subject": "Chemistry",
+  "units": [
+    {
+      "name": "Periodic Properties and variations of Properties – Physical and Chemical",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/zd8n5mpuDBs",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Chemical Bonding",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/RbhnZg7ZmuA",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Study of Acids, Bases and Salts",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/yht-XYeCMnY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Analytical Chemistry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/oEtqrKcRgqA",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Mole Concept and Stoichiometry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/1emXufJSElY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Electrolysis",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/BEBy1JvNq-A",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Metallurgy",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/Ty1a0uGAQTc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Study of Compounds – Hydrogen Chloride",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/unPwVsILM3c",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Study of Compounds – Ammonia",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/xXBytkk1ZJg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Study of Compounds – Nitric Acid",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/MkV7We3PkjY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Study of Compounds – Sulphuric Acid",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/DdVqBHxQhUg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Organic Chemistry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/PEWYHFBhqcc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035c94296d203c20c284a4"
+  },
+  "grade": 10,
+  "subject": "Biology",
+  "units": [
+    {
+      "name": "Basic Biology",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/O_WBeXg3bH4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Plant Physiology",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/q-384ATTaZ4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Human Anatomy and Physiology",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/3pMb7VWSVDU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Population",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ALFRqgCChSo",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Human Evolution",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/-73a0l3VAX0",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Pollution",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/wFicRhMYQv0",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035d0e296d203c20c284a5"
+  },
+  "grade": 10,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "name": "Commercial Mathematics",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/o9UgaGHzDiI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Algebra",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/KXCJIJYAiV4",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Geometry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/smAURgzzG4w",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Mensuration",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/zOn7pFRrnYI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Trigonometry",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/hrVrTzmbe24",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/dz9beV8KfWc",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Probability",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/h8aeBnnqklM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035d78296d203c20c284a6"
+  },
+  "grade": 10,
+  "subject": "History & Civics",
+  "units": [
+    {
+      "name": "The Union Legislature",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/ARTVayexs70",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Union Executive",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/m6E83v_wzGg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Indian National Movement (1857 - 1917)",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/GwJdVzLkPJo",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Mass Phase of the National Movement (1915-1947)",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/9R665ULV_Xk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Contemporary World",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/fmaqN5bcW7E",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035ded296d203c20c284a7"
+  },
+  "grade": 10,
+  "subject": "Geography",
+  "units": [
+    {
+      "name": "Interpretation of Topographical Maps",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/vBQF2xqc5w8",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Map of India",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/RfE3aJzIVyw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Climate",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/7ry3eXTLSQU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Soil Resources",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/HEonaSHKPuA",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Natural Vegetation",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/F47W9LTTNvg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Water Resources",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/yfum02ziHtU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Mineral and Energy Resources",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/9Fuam-6E78o",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Agriculture",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/eL4xQzTzaew",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Manufacturing Industries",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/DiLGtSPWjjs",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Transport",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/DFlQdPQT7LI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Waste Management",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/kjEcxe_Rh2g",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035e4d296d203c20c284a8"
+  },
+  "grade": 10,
+  "subject": "Economics",
+  "units": [
+    {
+      "name": "The Productive Mechanism",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/iOK-hXXjp6s",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Theory of Demand and Supply",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/yG_1ZTNgIpg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Market",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/gzs9T3JJMaY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Banking in India",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/V5sEgpQRalk",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Inflation",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/bgFXx8y39yE",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Consumer Awareness",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/2cPwUR2YVEI",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6a035ea4296d203c20c284a9"
+  },
+  "grade": 10,
+  "subject": "English",
+  "units": [
+    {
+      "name": "Julius Caesar",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/6Po59AKYdYs",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "With the Photographer",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/f5l_Xhqi_wg",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Elevator",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/wtF_kBXgyXw",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Girl Who Can",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/rhjNURxQUEU",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Pedestrian",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/NBMCDd5Nczo",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Last Lesson",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/DesBKtZ_kEY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "Haunted Houses",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/N1GcwI_ET5U",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Glove and the Lions",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/QXRTDGbDEok",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "When Great Trees Fall",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/YE-BvT9avtM",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "A Considerable Speck",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/uWSZGKuZrG0",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    },
+    {
+      "name": "The Power of Music",
+      "resources": [
+        {
+          "link": "https://www.youtube.com/embed/t-hD4Zk__KY",
+          "lang": "en",
+          "isOriginal": false
+        }
+      ]
+    }
+  ]
+}]
