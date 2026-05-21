@@ -23,9 +23,33 @@ const CURRICULUM = {
   10: {
     CBSE: ['Mathematics', 'Science', 'Social Studies', 'English', 'Hindi'],
     SSC: ['Mathematics', 'Physics', 'Biology', 'Social Studies', 'Telugu', 'Hindi-2', 'English'],
-    ICSE: ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'history_civics', 'Geography', 'Economics', 'English']
+    ICSE: ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'History & Civics', 'Geography', 'Economics', 'English']
   }
 };
+
+const LANGUAGE_CODES = {
+  English: 'en',
+  Hindi: 'hi',
+  Telugu: 'te',
+  Tamil: 'ta',
+  Kannada: 'kn',
+  Malayalam: 'ml'
+};
+
+function _getDbSubject(board, grade, subject) {
+  if (board === 'ICSE' && grade === 10 && subject === 'history_civics') {
+    return 'History & Civics';
+  }
+
+  return subject;
+}
+
+function _getVideoId(url) {
+  let vidId = String(url || '').split('embed/')[1] || String(url || '').split('v=')[1] || String(url || '');
+  if (vidId.includes('&')) vidId = vidId.split('&')[0];
+  if (vidId.includes('?')) vidId = vidId.split('?')[0];
+  return vidId;
+}
 
 /**
  * GET /  — Render landing page
@@ -112,10 +136,7 @@ exports.getChapters = async (req, res) => {
 
   try {
     // 0. Map subject names to database names if necessary
-    let dbSubject = subject;
-    if (boardUp === 'ICSE' && gradeNum === 10 && subject === 'history_civics') {
-      dbSubject = 'History & Civics';
-    }
+    let dbSubject = _getDbSubject(boardUp, gradeNum, subject);
 
     const subjectRegex = new RegExp(`^${_escapeRegex(dbSubject)}$`, 'i');
 
@@ -234,19 +255,18 @@ exports.getVideo = async (req, res) => {
 
   // ── 0. Check the new Video model first (Highest Priority) ──
   try {
-    const subjectRegex = new RegExp(`^${_escapeRegex(subject)}$`, 'i');
+    const boardUp = board ? board.toUpperCase() : 'SSC';
+    const dbSubject = _getDbSubject(boardUp, gradeNum, subject);
+    const subjectRegex = new RegExp(`^${_escapeRegex(dbSubject)}$`, 'i');
     const chapterRegex = new RegExp(`^${_escapeRegex(chapter)}$`, 'i');
     const directVideo = await Video.findOne({ 
       grade: String(gradeNum), 
-      board: board ? board.toUpperCase() : 'SSC', 
+      board: boardUp,
       subject: subjectRegex,
       chapter: chapterRegex 
     });
     if (directVideo) {
-      // Extract video ID from URL if possible
-      let vidId = directVideo.url.split('embed/')[1] || directVideo.url.split('v=')[1] || directVideo.url;
-      if (vidId.includes('&')) vidId = vidId.split('&')[0];
-      if (vidId.includes('?')) vidId = vidId.split('?')[0];
+      const vidId = _getVideoId(directVideo.url);
 
       return res.json({
         cached: true,
@@ -263,10 +283,46 @@ exports.getVideo = async (req, res) => {
     console.warn('Video model lookup failed:', err.message);
   }
 
+  // 0b. Check board syllabus collections imported from JSON.
+  try {
+    const boardUp = board ? board.toUpperCase() : 'SSC';
+    const dbSubject = _getDbSubject(boardUp, gradeNum, subject);
+    const subjectRegex = new RegExp(`^${_escapeRegex(dbSubject)}$`, 'i');
+    const collectionName = boardUp + '_Syllabi';
+    const requestedLangCode = LANGUAGE_CODES[language] || String(language || '').toLowerCase();
+
+    if (mongoose.connection && mongoose.connection.db) {
+      const doc = await mongoose.connection.db.collection(collectionName).findOne({
+        grade: gradeNum,
+        subject: subjectRegex
+      });
+
+      const unit = (doc?.units || []).find(item => _normalizeString(item.name || item.chapterName) === _normalizeString(chapter));
+      const resource = (unit?.resources || []).find(item => item.lang === requestedLangCode) || (unit?.resources || [])[0];
+
+      if (resource?.link) {
+        const vidId = _getVideoId(resource.link);
+        return res.json({
+          cached: true,
+          video: {
+            youtubeVideoId: vidId,
+            title: `${chapter} (${language})`,
+            embedUrl: resource.link,
+            viewCount: 0,
+            likeCount: 0
+          }
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('Syllabus video lookup failed:', err.message);
+  }
+
   // ── 1. Check MongoDB Subject cache ─────────────
   try {
     if (board && subject) {
-      const subjectRegex = new RegExp(`^${_escapeRegex(subject)}$`, 'i');
+      const dbSubject = _getDbSubject(board.toUpperCase(), gradeNum, subject);
+      const subjectRegex = new RegExp(`^${_escapeRegex(dbSubject)}$`, 'i');
       const doc = await Subject.findOne({
         grade: gradeNum,
         board: board.toUpperCase(),
