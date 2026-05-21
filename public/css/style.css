@@ -1130,8 +1130,8 @@ main .admin-container + .admin-container{margin-top:1rem !important}
   }
   .chapters-table th,
   .chapters-table td{
-    height:42px;
-    padding:.38rem .48rem;
+    height:30px;
+    padding:.24rem .36rem;
     border:0;
     border-right:1px solid rgba(29,57,102,.16);
     border-bottom:1px solid rgba(29,57,102,.14);
@@ -1144,23 +1144,26 @@ main .admin-container + .admin-container{margin-top:1rem !important}
     border-bottom:0;
   }
   .col-headers-row th{
-    font-size:.78rem;
+    height:38px;
+    font-size:.68rem;
     font-weight:800;
+    line-height:1.15;
   }
   .col-lesson{
-    width:46px;
+    width:36px;
   }
   .chapter-row td{
-    font-size:.76rem;
+    font-size:.64rem;
     font-weight:700;
-    line-height:1.18;
+    line-height:1.1;
   }
   .chapter-row .col-title,
   .chapter-row .col-title a{
     text-align:left;
+    white-space:nowrap;
   }
   .chapter-row .col-title{
-    padding-left:.72rem;
+    padding-left:.5rem;
   }
 }
 
