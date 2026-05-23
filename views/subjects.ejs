@@ -35,6 +35,9 @@
 
   <main class="step-main">
     <div class="step-container">
+      <div class="context-heading">
+        <div class="context-grade">Class <%= selectedGrade || 10 %></div>
+      </div>
 
       <div class="step-progress" id="step-progress">
         <div class="step-dot completed" data-step="1">
@@ -49,7 +52,7 @@
       </div>
 
       <div class="step-header">
-        <h1 class="step-title"><span class="hero-highlight" data-i18n="Select Your Subject">Select Your Subject</span></h1>
+        <h1 class="step-title"><span class="hero-highlight">Select Your <%= selectedBoard || 'Board' %> Subject</span></h1>
         <p class="step-subtitle strong-subtitle" data-i18n="Pick a subject to explore chapters and start watching">Pick a subject to explore chapters and start watching</p>
       </div>
 
