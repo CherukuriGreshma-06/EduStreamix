@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Blue Loop Logo</title>
+  <desc id="desc">A rounded blue loop mark with two inner blue dots.</desc>
+  <rect width="256" height="256" rx="38" fill="#f8fbff"/>
+  <rect x="8" y="8" width="240" height="240" rx="34" fill="none" stroke="#2f7acc" stroke-width="8" opacity=".42"/>
+  <circle cx="128" cy="126" r="94" fill="#053f98"/>
+  <ellipse cx="94" cy="126" rx="42" ry="76" fill="#d2d2cc"/>
+  <ellipse cx="162" cy="126" rx="42" ry="76" fill="#d2d2cc"/>
+  <circle cx="95" cy="126" r="24" fill="#053f98"/>
+  <circle cx="161" cy="126" r="24" fill="#053f98"/>
+  <path d="M128 77c9-21 28-33 53-34 35 16 59 48 59 86 0 52-42 94-94 94-8 0-15-1-22-3 22-12 36-36 36-94 0-28-10-42-32-49Z" fill="#032f78" opacity=".18"/>
+</svg>

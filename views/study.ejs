@@ -39,6 +39,10 @@
 
   <main class="study-main">
     <div class="study-container">
+      <div class="context-heading" id="studyContextHeading">
+        <div class="context-grade">Class <%= selectedGrade || 10 %></div>
+        <div class="context-selected" id="studyContextSelected"><%= displaySubject || selectedSubject || '' %></div>
+      </div>
 
       <!-- PROGRESS BAR -->
       <div class="step-progress" id="step-progress">
@@ -138,10 +142,10 @@
 
   <!-- GLOBAL DATA -->
   <script>
-    window.__GRADE__ = '<%= selectedGrade || 10 %>';
-    window.__BOARD__ = '<%= selectedBoard || "" %>';
-    window.__SUBJECT__ = '<%= selectedSubject || "" %>';
-    window.__DISPLAY_SUBJECT__ = '<%= displaySubject || "" %>';
+    window.__GRADE__ = <%- JSON.stringify(selectedGrade || 10) %>;
+    window.__BOARD__ = <%- JSON.stringify(selectedBoard || "") %>;
+    window.__SUBJECT__ = <%- JSON.stringify(selectedSubject || "") %>;
+    window.__DISPLAY_SUBJECT__ = <%- JSON.stringify(displaySubject || "") %>;
   </script>
 
   <!-- MAIN JS -->
@@ -169,6 +173,12 @@
     });
 
     function goBack() {
+      if (window.setStudyContextSelectedVisible) {
+        window.setStudyContextSelectedVisible(true);
+      }
+      if (window.setStudyContextSelected) {
+        window.setStudyContextSelected(window.__DISPLAY_SUBJECT__ || window.__SUBJECT__ || '');
+      }
       document.getElementById('videoSection').style.display = 'none';
       document.getElementById('chaptersSection').style.display = '';
       const chaptersBottomNav = document.getElementById('chaptersBottomNav');

@@ -35,6 +35,9 @@
 
   <main class="step-main">
     <div class="step-container">
+      <div class="context-heading">
+        <div class="context-grade">Class <%= selectedGrade || 10 %></div>
+      </div>
 
       <div class="step-header">
         <h1 class="step-title"><span data-i18n="Select Your Board">Select Your Board</span></h1>
@@ -46,7 +49,7 @@
           <div class="board-card-glow"></div>
           <span class="board-icon">🏫</span>
           <h3 class="board-card-title" data-i18n="SSC">SSC</h3>
-          <p class="board-card-label" data-i18n="State Board">State Board</p>
+          <p class="board-card-label" data-i18n="Telangana State Board">Telangana State Board</p>
           <span class="board-card-arrow">→</span>
         </a>
         <a href="/subjects?grade=<%= selectedGrade %>&board=CBSE" class="board-card" id="board-card-cbse">

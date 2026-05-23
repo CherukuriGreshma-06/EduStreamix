@@ -7,6 +7,20 @@ const videoSection = document.getElementById('videoSection');
 
 const DISPLAY_SUBJECT = window.__DISPLAY_SUBJECT__ || sessionStorage.getItem('subject') || '';
 
+function setStudyContextSelected(value) {
+  const contextSelected = document.getElementById('studyContextSelected');
+  if (contextSelected) {
+    contextSelected.innerText = value || DISPLAY_SUBJECT;
+  }
+}
+
+function setStudyContextSelectedVisible(isVisible) {
+  const contextSelected = document.getElementById('studyContextSelected');
+  if (contextSelected) {
+    contextSelected.style.display = isVisible ? '' : 'none';
+  }
+}
+
 // ---------------- FETCH CHAPTERS ----------------
 async function getFinalChapters(apiUrl, cacheKey) {
   try {
@@ -81,6 +95,7 @@ async function showChapters(apiUrl) {
 
 // ---------------- SHOW VIDEO ----------------
 async function showVideoMode(currentChapterData) {
+  setStudyContextSelectedVisible(false);
 
   // Reset
   videoData = null;
