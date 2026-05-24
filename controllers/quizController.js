@@ -8,6 +8,7 @@ const translate = require('google-translate-api-x');
 const PRIMARY_MODEL  = 'gemini-2.0-flash';
 const FALLBACK_MODEL = 'gemini-2.5-flash';
 const API_VERSION    = 'v1beta';
+const GEMINI_TIMEOUT_MS = 25000;
 
 const LANG_CODES = {
   'English':   'en',
@@ -78,17 +79,39 @@ async function callGemini(model, prompt) {
   const payload = {
     contents: [{
       parts: [{ text: prompt }]
-    }]
+    }],
+    generationConfig: {
+      temperature: 0.4,
+      responseMimeType: 'application/json'
+    }
   };
 
   const response = await axios.post(url, payload, {
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
+    timeout: GEMINI_TIMEOUT_MS
   });
 
-  if (response.data && response.data.candidates && response.data.candidates[0].content) {
-    return response.data.candidates[0].content.parts[0].text;
+  const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (text) {
+    return text;
   }
   throw new Error("Invalid response structure from Gemini API");
+}
+
+function validateQuizData(quizData) {
+  if (!quizData || !Array.isArray(quizData.questions)) {
+    return false;
+  }
+
+  return quizData.questions.every((q) => (
+    q &&
+    typeof q.question === 'string' &&
+    Array.isArray(q.options) &&
+    q.options.length === 4 &&
+    Number.isInteger(q.correctAnswerIndex) &&
+    q.correctAnswerIndex >= 0 &&
+    q.correctAnswerIndex <= 3
+  ));
 }
 
 /**
@@ -131,7 +154,10 @@ exports.generateTest = async (req, res) => {
   const { focusTopic, lang } = req.body;
 
   if (!process.env.GEMINI_API_KEY) {
-    return res.status(500).json({ error: "Configuration Error", message: "API Key is missing." });
+    return res.status(500).json({
+      error: "Configuration Error",
+      message: "Quiz generation is not configured on the server. Add GEMINI_API_KEY in Render environment variables."
+    });
   }
 
   console.log(`\n=== AI QUIZ REQUEST: ${focusTopic} | lang=${lang || 'English'} ===`);
@@ -163,7 +189,7 @@ exports.generateTest = async (req, res) => {
       }
     }
 
-    if (!quizData) {
+    if (!validateQuizData(quizData)) {
       throw new Error(lastError ? lastError.message : "All AI generation attempts failed.");
     }
 

@@ -274,9 +274,12 @@ async function generateQuiz() {
   `;
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 45000);
     const res = await fetch('/api/generate-test', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
       body: JSON.stringify({
         board: board,
         grade: grade,
@@ -286,11 +289,15 @@ async function generateQuiz() {
         numQuestions: 5
       })
     });
+    clearTimeout(timeoutId);
 
-    const data = await res.json();
+    const contentType = res.headers.get('content-type') || '';
+    const data = contentType.includes('application/json')
+      ? await res.json()
+      : { error: 'Server Error', message: await res.text() };
 
-    if (data.error) {
-      quizBody.innerHTML = `<p style="color:red;">Error: ${data.message}</p>`;
+    if (!res.ok || data.error) {
+      quizBody.innerHTML = `<p style="color:red;">Error: ${data.message || 'Unable to generate quiz right now.'}</p>`;
       generateBtn.disabled = false;
       generateBtn.classList.remove('is-loading');
       generateBtn.innerText = 'Generate Quiz';
@@ -298,12 +305,19 @@ async function generateQuiz() {
       return;
     }
 
+    if (!data.questions || !Array.isArray(data.questions)) {
+      throw new Error('Invalid quiz response');
+    }
+
     currentQuizData = data;
     renderQuiz(data.questions);
 
   } catch (err) {
     console.error(err);
-    quizBody.innerHTML = `<p style="color:red;">Failed to generate quiz. Please try again.</p>`;
+    const message = err.name === 'AbortError'
+      ? 'Quiz generation timed out. Please try again.'
+      : 'Failed to generate quiz. Please try again.';
+    quizBody.innerHTML = `<p style="color:red;">${message}</p>`;
     generateBtn.disabled = false;
     generateBtn.classList.remove('is-loading');
     generateBtn.innerText = 'Generate Quiz';
