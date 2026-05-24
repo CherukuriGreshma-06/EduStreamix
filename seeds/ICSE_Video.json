@@ -369,7 +369,7 @@
     "$oid": "6a035d78296d203c20c284a6"
   },
   "grade": 10,
-  "subject": "History & Civics",
+  "subject": "history_civics",
   "units": [
     {
       "name": "The Union Legislature",

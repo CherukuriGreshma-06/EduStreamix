@@ -83,7 +83,7 @@ const CLASS10_ICSE_DATA = [
   {
     grade: 10,
     board: "ICSE",
-    subject: "History & Civics",
+    subject: "history_civics",
     units: [
       {
         unitName: "General",

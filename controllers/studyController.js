@@ -10,14 +10,14 @@ exports.renderLanding = (req, res) => {
 exports.renderBoards = (req, res) => {
   const { grade } = req.query;
   res.render('boards', {
-    selectedGrade: grade || '8'
+    selectedGrade: grade || '10'
   });
 };
 
 exports.renderSubjects = (req, res) => {
   const { grade, board, language } = req.query;
   res.render('subjects', {
-    selectedGrade: grade || '8',
+    selectedGrade: grade || '10',
     selectedBoard: board || 'CBSE',
     selectedLanguage: language || 'English'
   });

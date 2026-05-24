@@ -23,8 +23,8 @@ function normalize(value) {
 }
 
 function getCanonicalSubject(board, subject) {
-  if (board === 'ICSE' && subject === 'history_civics') {
-    return 'History & Civics';
+  if (board === 'ICSE' && subject === 'History & Civics') {
+    return 'history_civics';
   }
 
   return subject;
