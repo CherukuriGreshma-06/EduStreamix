@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduStreamix - Unlock Access</title>
+  <link rel="stylesheet" href="/css/payment.css">
+</head>
+<body>
+  <main class="locked-page">
+    <section class="locked-card" aria-labelledby="payment-title">
+      <div class="lock-mark" aria-hidden="true">🔒</div>
+      <p class="price-note">Just ₹<%= amount || 1 %></p>
+      <h1 id="payment-title">SITE LOCKED</h1>
+      <p class="locked-copy">Unlock the ultimate learning experience for Grade 10. No distractions, just pure focus.</p>
+
+      <button id="pay-button" class="pay-button" type="button">
+        <span class="button-icon" aria-hidden="true">↳</span>
+        Pay ₹<%= amount || 1 %> Now
+      </button>
+
+      <p class="secure-note">100% secure checkout</p>
+      <p id="payment-message" class="payment-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="/js/payment.js"></script>
+</body>
+</html>

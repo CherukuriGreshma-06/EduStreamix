@@ -1274,3 +1274,60 @@ main .admin-container + .admin-container{margin-top:1rem !important}
     line-height:1.35;
   }
 }
+
+/* Landing logo lockup: three logos in one row, EduStreamix below */
+.landing-body .logo-banner-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(.5rem,1.5vw,.9rem);
+}
+.landing-body .logo-banner-top{
+  width:min(100%,780px);
+  display:grid;
+  grid-template-columns:minmax(86px,1fr) minmax(112px,1.15fr) minmax(118px,1fr);
+  align-items:center;
+  justify-items:center;
+  gap:clamp(.75rem,4vw,3.2rem);
+}
+.landing-body .partner-logo-left{
+  max-height:clamp(72px,12vw,118px);
+}
+.landing-body .partner-logo-right{
+  max-height:clamp(66px,11vw,110px);
+}
+.landing-body .center-logo-mark{
+  width:clamp(118px,22vw,230px);
+  aspect-ratio:3 / 2;
+  padding:0;
+  background:transparent;
+  box-shadow:none;
+  filter:drop-shadow(0 10px 16px rgba(7,59,148,.14));
+}
+.landing-body .brand-title-marker{
+  width:100%;
+  display:block;
+  margin:.1rem 0 0;
+  text-align:center;
+}
+
+@media(max-width:560px){
+  .landing-body .logo-banner-inner{
+    flex-direction:column;
+    min-height:auto;
+  }
+  .landing-body .logo-banner-top{
+    grid-template-columns:minmax(60px,1fr) minmax(82px,1.15fr) minmax(72px,1fr);
+    gap:.5rem;
+  }
+  .landing-body .partner-logo-left{
+    max-height:64px;
+  }
+  .landing-body .partner-logo-right{
+    max-height:58px;
+  }
+  .landing-body .center-logo-mark{
+    width:clamp(86px,28vw,118px);
+  }
+}

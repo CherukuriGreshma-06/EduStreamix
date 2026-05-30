@@ -10,7 +10,6 @@
       <feDropShadow dx="0" dy="7" stdDeviation="4" flood-color="#202018" flood-opacity=".55"/>
     </filter>
   </defs>
-  <rect width="360" height="240" fill="#ffffff"/>
   <ellipse cx="180" cy="120" rx="166" ry="98" fill="#073b94"/>
   <g filter="url(#softShadow)" transform="translate(0 3)">
     <ellipse cx="135" cy="123" rx="58" ry="78" fill="#2c2c27"/>

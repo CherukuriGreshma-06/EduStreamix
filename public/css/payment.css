@@ -1,0 +1,161 @@
+:root {
+  --page: #eee8d9;
+  --page-warm: #d8c79e;
+  --card: rgba(255, 255, 255, 0.78);
+  --text: #0f1720;
+  --muted: #4b4a45;
+  --teal: #008c78;
+  --teal-dark: #006b5c;
+  --danger: #9f1d1d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(circle at 28% 32%, rgba(255, 255, 255, 0.56), transparent 34%),
+    radial-gradient(circle at 72% 58%, rgba(199, 169, 102, 0.36), transparent 42%),
+    linear-gradient(110deg, #f4f1e7 0%, var(--page) 50%, var(--page-warm) 100%);
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(80, 71, 54, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 71, 54, 0.1) 1px, transparent 1px);
+  background-size: 86px 86px;
+}
+
+.locked-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.locked-card {
+  width: min(92vw, 390px);
+  min-height: 318px;
+  padding: 44px 48px 34px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 16px;
+  box-shadow: 0 26px 68px rgba(69, 57, 35, 0.16);
+  backdrop-filter: blur(10px);
+}
+
+.lock-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.price-note {
+  margin: 0 0 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #33302a;
+}
+
+h1 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.locked-copy {
+  max-width: 310px;
+  margin: 14px auto 22px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.pay-button {
+  width: 100%;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  color: #ffffff;
+  background: linear-gradient(180deg, #079b84, var(--teal));
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 10px 22px rgba(0, 119, 101, 0.24);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background: linear-gradient(180deg, #07a88f, var(--teal-dark));
+}
+
+.pay-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.button-icon {
+  font-size: 1rem;
+  transform: translateY(-1px);
+}
+
+.secure-note {
+  margin: 12px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #575149;
+}
+
+.payment-message {
+  min-height: 20px;
+  margin: 12px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  color: #575149;
+}
+
+.payment-message.is-error {
+  color: var(--danger);
+}
+
+@media (max-width: 520px) {
+  .locked-card {
+    padding: 36px 24px 28px;
+  }
+}
