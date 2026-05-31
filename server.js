@@ -12,6 +12,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const paymentRoutes = require('./routes/paymentRoutes');
 const studyRoutes = require('./routes/studyRoutes');
 const videoRoutes = require('./routes/videoRoutes');
+const studyController = require('./controllers/studyController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,11 +35,6 @@ app.set('views', path.join(__dirname, 'views'));
 // ✅ Dedicated Mount for Payment Pages & API Endpoints
 app.use('/payment', paymentRoutes);
 
-// ✅ Public Gateway Entry Landing Page
-app.get('/landing', (req, res) => {
-  res.render('landing', { error: null });
-});
-
 // ==========================================
 // 🔒 GATEKEEPER SECURITY WALL
 // ==========================================
@@ -48,6 +44,8 @@ app.use(authMiddleware);
 // 🎓 INTERNAL PROTECTED ROUTES (Authorized Users Only)
 // ==========================================
 
+app.get('/landing', studyController.renderLanding);
+
 // Handles protected dashboard resources at root "/"
 app.use('/', studyRoutes);
 app.use('/api', videoRoutes);
@@ -56,7 +54,7 @@ app.use('/api', videoRoutes);
 // 🚫 ERROR & FALLTHROUGH MANAGEMENT
 // ==========================================
 app.use((req, res) => {
-  res.status(404).redirect('/');
+  res.status(404).redirect('/landing');
 });
 
 app.use((err, req, res, next) => {

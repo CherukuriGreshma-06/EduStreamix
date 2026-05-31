@@ -32,17 +32,14 @@ function authMiddleware(req, res, next) {
       return res.status(401).json({ error: 'Payment required' });
     }
 
-    return res.status(402).render('payment', {
-      amount: Number(envValue('PAYMENT_AMOUNT_INR', 'RAZORPAY_AMOUNT') || 1),
-      currency: envValue('PAYMENT_CURRENCY') || 'INR',
-    });
+    return res.redirect('/payment');
   }
 
   try {
     const decoded = jwt.verify(token, config.jwtSecret);
 
-    if (!decoded.paid) {
-      throw new Error('Payment token is not marked as paid');
+    if (decoded.access !== true) {
+      throw new Error('Payment token does not grant access');
     }
 
     req.user = decoded;
@@ -54,10 +51,7 @@ function authMiddleware(req, res, next) {
       return res.status(401).json({ error: 'Payment required' });
     }
 
-    return res.status(402).render('payment', {
-      amount: Number(envValue('PAYMENT_AMOUNT_INR', 'RAZORPAY_AMOUNT') || 1),
-      currency: envValue('PAYMENT_CURRENCY') || 'INR',
-    });
+    return res.redirect('/payment');
   }
 }
 

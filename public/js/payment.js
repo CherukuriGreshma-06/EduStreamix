@@ -31,8 +31,8 @@
     return data;
   }
 
-  async function verifyPayment(paymentResponse) {
-    const response = await fetch('/payment/verify-payment', {
+  async function completePayment(paymentResponse) {
+    const response = await fetch('/payment/success', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@
       throw new Error(data.error || 'Payment verification failed');
     }
 
-    window.location.href = data.redirectUrl || '/';
+    window.location.href = data.redirectUrl || '/landing';
   }
 
   payButton.addEventListener('click', async () => {
@@ -58,6 +58,12 @@
       }
 
       const order = await createOrder();
+
+      if (order.redirectUrl) {
+        window.location.href = order.redirectUrl;
+        return;
+      }
+
       const displayAmount = order.displayAmount || Math.round(Number(order.amount || 0) / 100);
 
       const checkout = new Razorpay({
@@ -70,7 +76,7 @@
         handler: async function (paymentResponse) {
           payButton.disabled = true;
           setMessage('Verifying payment...', false);
-          await verifyPayment(paymentResponse);
+          await completePayment(paymentResponse);
         },
         theme: {
           color: '#f4b321',

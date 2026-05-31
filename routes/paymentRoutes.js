@@ -29,6 +29,7 @@ function getPaymentConfig() {
     amountInRupees: safeAmount,
     amountInPaise: Math.round(safeAmount * 100),
     cookieName: envValue('AUTH_COOKIE_NAME') || 'session_token',
+    allowQrSimulation: envValue('ALLOW_QR_PAYMENT_SIMULATION') === 'true',
   };
 }
 
@@ -50,12 +51,108 @@ function cookieOptions() {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
   };
+}
+
+function hasValidAccessToken(req, config) {
+  const token = req.cookies?.[config.cookieName];
+
+  if (!token || !config.jwtSecret) {
+    return false;
+  }
+
+  try {
+    const decoded = jwt.verify(token, config.jwtSecret);
+    return decoded?.access === true;
+  } catch (_) {
+    return false;
+  }
+}
+
+function issueAccessToken(res, config, extraPayload = {}) {
+  if (!config.jwtSecret) {
+    const error = new Error('JWT_SECRET is not configured');
+    error.statusCode = 500;
+    throw error;
+  }
+
+  const token = jwt.sign(
+    {
+      user: 'paid_user',
+      access: true,
+      ...extraPayload,
+    },
+    config.jwtSecret,
+    { expiresIn: '30d' }
+  );
+
+  res.cookie(config.cookieName, token, cookieOptions());
+}
+
+function verifyRazorpayPayment(config, paymentDetails) {
+  const {
+    razorpay_order_id: orderId,
+    razorpay_payment_id: paymentId,
+    razorpay_signature: signature,
+  } = paymentDetails || {};
+
+  if (!orderId || !paymentId || !signature) {
+    const error = new Error('Missing payment details');
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (!config.keySecret) {
+    const error = new Error('Payment verification is not configured');
+    error.statusCode = 500;
+    throw error;
+  }
+
+  const expectedSignature = crypto
+    .createHmac('sha256', config.keySecret)
+    .update(`${orderId}|${paymentId}`)
+    .digest('hex');
+
+  if (expectedSignature !== signature) {
+    const error = new Error('Invalid payment signature');
+    error.statusCode = 400;
+    throw error;
+  }
+
+  return { orderId, paymentId };
+}
+
+function completePayment(req, res) {
+  const config = getPaymentConfig();
+
+  try {
+    const payment = req.body?.qrPayment === true && config.allowQrSimulation
+      ? { orderId: `qr_${Date.now()}`, paymentId: `simulated_${Date.now()}` }
+      : verifyRazorpayPayment(config, req.body);
+
+    issueAccessToken(res, config, {
+      paymentId: payment.paymentId,
+      orderId: payment.orderId,
+    });
+
+    return res.json({ success: true, redirectUrl: '/landing' });
+  } catch (error) {
+    const statusCode = error.statusCode || 500;
+    return res.status(statusCode).json({
+      success: false,
+      error: error.message || 'Unable to complete payment',
+    });
+  }
 }
 
 router.get('/', (req, res) => {
   const config = getPaymentConfig();
+
+  if (hasValidAccessToken(req, config)) {
+    return res.redirect('/landing');
+  }
+
   res.render('payment', {
     amount: config.amountInRupees,
     currency: config.currency,
@@ -65,6 +162,11 @@ router.get('/', (req, res) => {
 router.post('/create-order', async (req, res) => {
   try {
     const config = getPaymentConfig();
+
+    if (hasValidAccessToken(req, config)) {
+      return res.json({ redirectUrl: '/landing' });
+    }
+
     const razorpay = getRazorpayClient(config);
 
     const order = await razorpay.orders.create({
@@ -92,43 +194,7 @@ router.post('/create-order', async (req, res) => {
   }
 });
 
-router.post('/verify-payment', (req, res) => {
-  const config = getPaymentConfig();
-  const {
-    razorpay_order_id: orderId,
-    razorpay_payment_id: paymentId,
-    razorpay_signature: signature,
-  } = req.body;
-
-  if (!orderId || !paymentId || !signature) {
-    return res.status(400).json({ success: false, error: 'Missing payment details' });
-  }
-
-  if (!config.keySecret || !config.jwtSecret) {
-    return res.status(500).json({ success: false, error: 'Payment verification is not configured' });
-  }
-
-  const expectedSignature = crypto
-    .createHmac('sha256', config.keySecret)
-    .update(`${orderId}|${paymentId}`)
-    .digest('hex');
-
-  if (expectedSignature !== signature) {
-    return res.status(400).json({ success: false, error: 'Invalid payment signature' });
-  }
-
-  const token = jwt.sign(
-    {
-      paid: true,
-      paymentId,
-      orderId,
-    },
-    config.jwtSecret,
-    { expiresIn: '7d' }
-  );
-
-  res.cookie(config.cookieName, token, cookieOptions());
-  return res.json({ success: true, redirectUrl: '/' });
-});
+router.post('/success', completePayment);
+router.post('/verify-payment', completePayment);
 
 module.exports = router;
