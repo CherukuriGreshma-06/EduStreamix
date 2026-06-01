@@ -33,7 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 // ==========================================
 
 // ✅ Dedicated Mount for Payment Pages & API Endpoints
-app.use('/payment', paymentRoutes);
+//app.use('/payment', paymentRoutes);
 
 // ==========================================
 // 🔒 GATEKEEPER SECURITY WALL
