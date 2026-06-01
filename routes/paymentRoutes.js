@@ -18,8 +18,8 @@ function envValue(...names) {
 }
 
 function getPaymentConfig() {
-  const amountInRupees = Number(envValue('PAYMENT_AMOUNT_INR', 'RAZORPAY_AMOUNT') || 1);
-  const safeAmount = Number.isFinite(amountInRupees) && amountInRupees > 0 ? amountInRupees : 1;
+  const amountInRupees = Number(envValue('PAYMENT_AMOUNT_INR', 'RAZORPAY_AMOUNT') || 10);
+  const safeAmount = Number.isFinite(amountInRupees) && amountInRupees > 0 ? amountInRupees : 10;
 
   return {
     keyId: envValue('RAZORPAY_KEY_ID', 'RAZORPAY_KEY'),
