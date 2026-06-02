@@ -29,19 +29,19 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // ==========================================
-// 📄 PUBLIC ACCESS ROUTING (No Sessions Checked)
+// PUBLIC ACCESS ROUTING (No Sessions Checked)
 // ==========================================
 
-// ✅ Dedicated Mount for Payment Pages & API Endpoints
-//app.use('/payment', paymentRoutes);
+//  Dedicated Mount for Payment Pages & API Endpoints
+app.use('/payment', paymentRoutes);
 
 // ==========================================
-// 🔒 GATEKEEPER SECURITY WALL
+//  GATEKEEPER SECURITY WALL
 // ==========================================
 app.use(authMiddleware);
 
 // ==========================================
-// 🎓 INTERNAL PROTECTED ROUTES (Authorized Users Only)
+//  INTERNAL PROTECTED ROUTES (Authorized Users Only)
 // ==========================================
 
 app.get('/landing', studyController.renderLanding);
@@ -51,7 +51,7 @@ app.use('/', studyRoutes);
 app.use('/api', videoRoutes);
 
 // ==========================================
-// 🚫 ERROR & FALLTHROUGH MANAGEMENT
+//  ERROR & FALLTHROUGH MANAGEMENT
 // ==========================================
 app.use((req, res) => {
   res.status(404).redirect('/landing');
